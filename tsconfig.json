@@ -13,10 +13,6 @@
     "allowJs": true,                 // Permite a compilação de arquivos JavaScript
     "checkJs": false                 // Desativa a verificação de tipos em arquivos .js
   },
-  "include": [
-    "src**/*.ts"                  // Inclui arquivos TypeScrip
-  ],
-  "exclude": [
-    "node_modules"                   // Exclui node_modules da compilação
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
