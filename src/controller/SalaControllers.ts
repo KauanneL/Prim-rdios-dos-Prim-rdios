@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import * as SalaModel from '../modelos/salaModelo';
+import { Sala } from '../models/Sala';
 
-// Função para obter os alunos
+
 export async function getMedicos(req: Request, res: Response) {
     try {
-      const medico = await SalaModel.getSala();
-      res.json(medico);
+      const sala = await SalaModel.getSala();
+      res.json(Sala);
     } catch (error) {
       res.status(500).json({ message: 'Erro ao buscar médico' });
     }
