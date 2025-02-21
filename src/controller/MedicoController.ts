@@ -7,6 +7,6 @@ export async function getMedicos(req: Request, res: Response) {
     const medico = await MedicoModel.getMedicos();
     res.json(medico);
   } catch (error) {
-    res.status(500).json({ message: 'Erro ao buscar paciente' });
+    res.status(500).json({ message: 'Erro ao buscar médico' });
   }
 }
