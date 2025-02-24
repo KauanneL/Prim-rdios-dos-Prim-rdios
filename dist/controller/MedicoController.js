@@ -7,16 +7,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as MedicoModel from '../modelos/medicoModelo';
+import * as MedicoModel from '../modelos/medicoModelo.js';
 // Função para obter os alunos
 export function getMedicos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const medico = yield MedicoModel.getMedicos();
+            const medico = yield MedicoModel.getMedico();
             res.json(medico);
         }
         catch (error) {
-            res.status(500).json({ message: 'Erro ao buscar paciente' });
+            res.status(500).json({ message: 'Erro ao buscar médico' });
         }
     });
 }

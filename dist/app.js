@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config(); // Isso vai carregar as variáveis de ambiente do arquivo .env
-import pacienteRouter from "./router/PacienteRouter";
-import medicoRouter from "./router/MedicoRouter";
+import pacienteRouter from "./router/PacienteRouter.js";
+import medicoRouter from "./router/MedicoRouter.js";
 const app = express();
 app.use(cors()); // Permitir requisições de diferentes origens
 app.use(express.json()); // Para manipular requisições JSON

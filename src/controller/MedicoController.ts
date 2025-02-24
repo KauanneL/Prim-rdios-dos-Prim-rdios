@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as MedicoModel from '../modelos/medicoModelo';
+import * as MedicoModel from '../modelos/medicoModelo.js';
 
 // Função para obter os alunos
 export async function getMedicos(req: Request, res: Response) {

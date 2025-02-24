@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as PacienteModel from '../modelos/pacienteModelo';
+import * as PacienteModel from '../modelos/pacientemodelo.js';
 // Função para obter os alunos
 export function getPaciente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {

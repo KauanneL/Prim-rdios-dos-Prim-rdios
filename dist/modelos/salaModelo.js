@@ -7,10 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 dotenv.config();
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
     host: 'localhost',
     user: "root",
@@ -18,34 +17,30 @@ const pool = mysql.createPool({
     database: "kbd",
     port: 3306,
 });
-// Função para obter todos os alunos
-export function getPaciente() {
+export function getSala() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [rows] = yield pool.execute('SELECT * FROM paciente');
+            const [rows] = yield pool.execute('SELECT * FROM sala');
             return rows;
         }
         catch (error) {
-            console.error('Erro ao obter paciente:', error);
-            throw new Error('Erro ao obter dados dos paciente');
+            console.error('Erro ao obter salas:', error);
+            throw new Error('Erro ao obter dados das salas');
         }
     });
 }
-// Função para criar aluno
-export function criarPaciente(nome, idade, telefone) {
+export function criarSala(numero, data, horario, status) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Verifique se algum valor é inválido antes de tentar inserir no banco
-        if (!nome || !idade || !telefone) {
+        if (!numero || !data || !horario || !status) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO paciente (nome,idade,telefone) VALUES (?, ?, ?)', [nome, idade, telefone]);
-            const insertId = result.insertId;
-            return { insertId }; // Retorna o ID do aluno inserido
+            const [result] = yield pool.execute('INSERT INTO sala (numero, data, horario, status) VALUES (?, ?, ?, ?)', [numero, data, horario, status]);
+            return { insertId: result.insertId };
         }
         catch (error) {
-            console.error('Erro ao criar paciente:', error);
-            throw new Error('Erro ao inserir dados do paciente');
+            console.error('Erro ao criar sala:', error);
+            throw new Error('Erro ao inserir dados da sala');
         }
     });
 }

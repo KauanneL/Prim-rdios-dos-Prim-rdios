@@ -7,16 +7,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as ConsultaModel from '../modelos/consultaModelo.js';
-// Função para obter os alunos
-export function getConsulta(req, res) {
+import * as SalaModel from '../modelos/salaModelo';
+export function getMedicos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const consulta = yield ConsultaModel.getConsulta();
-            res.json(consulta);
+            const sala = yield SalaModel.getSala();
+            res.json(sala);
         }
         catch (error) {
-            res.status(500).json({ message: 'Erro ao buscar consulta' });
+            res.status(500).json({ message: 'Erro ao buscar médico' });
         }
     });
 }

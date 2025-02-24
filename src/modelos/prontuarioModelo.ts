@@ -2,16 +2,15 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
-import { Paciente } from '../models/Paciente';
 
 dotenv.config();
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
+  host: 'localhost',
+  user: "root",
+  password: "",
+  database: "kbd",
+  port: 3306,
 });
 
 export async function getProntuario() {
@@ -25,7 +24,7 @@ export async function getProntuario() {
 }
 
 export async function criarProntuario(
-  paciente_id: Paciente, 
+  paciente_id: number, 
   historico: string,
 ) {
   if (!paciente_id || !historico) {

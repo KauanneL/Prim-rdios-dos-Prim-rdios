@@ -7,27 +7,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 dotenv.config();
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: Number(process.env.DB_PORT),
+    host: 'localhost',
+    user: "root",
+    password: "",
+    database: "kbd",
+    port: 3306,
 });
-// Função para obter todos os alunos
-export function getMedicos() {
+export function getMedico() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const [rows] = yield pool.execute('SELECT * FROM medicos');
             return rows;
         }
         catch (error) {
-            console.error('Erro ao obter paciente:', error);
-            throw new Error('Erro ao obter dados dos paciente');
+            console.error('Erro ao obter médicos:', error);
+            throw new Error('Erro ao obter dados dos médicos');
+        }
+    });
+}
+export function criarMedico(nome, especialidade) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!nome || !especialidade) {
+            throw new Error('Campos obrigatórios não preenchidos');
+        }
+        try {
+            const [result] = yield pool.execute('INSERT INTO medicos (nome, especialidade) VALUES (?, ?)', [nome, especialidade]);
+            return { insertId: result.insertId };
+        }
+        catch (error) {
+            console.error('Erro ao criar médico:', error);
+            throw new Error('Erro ao inserir dados do médico');
         }
     });
 }

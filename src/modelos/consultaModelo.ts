@@ -2,17 +2,15 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
-import { Paciente } from '../models/Paciente';
-import { Medico } from '../models/Medico';
 
 dotenv.config();
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
+  host: 'localhost',
+  user: "root",
+  password: "",
+  database: "kbd",
+  port: 3306,
 });
 
 export async function getConsulta() {
@@ -26,8 +24,8 @@ export async function getConsulta() {
 }
 
 export async function criarConsulta(
-  paciente_id: Paciente,
-  medico_id: Medico,
+  paciente_id: number,
+  medico_id: number,
   sala: string,
   data: string, 
   horario: string, 

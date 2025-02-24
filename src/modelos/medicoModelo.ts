@@ -5,16 +5,16 @@ import { ResultSetHeader } from 'mysql2';
 dotenv.config();
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
+  host: 'localhost',
+  user: "root",
+  password: "",
+  database: "kbd",
+  port: 3306,
 });
 
 export async function getMedico() {
   try {
-    const [rows] = await pool.execute('SELECT * FROM medico');
+    const [rows] = await pool.execute('SELECT * FROM medicos');
     return rows;
   } catch (error) {
     console.error('Erro ao obter médicos:', error);
@@ -31,7 +31,7 @@ export async function criarMedico(
   }
   try {
     const [result] = await pool.execute(
-      'INSERT INTO medico (nome, especialidade) VALUES (?, ?)',
+      'INSERT INTO medicos (nome, especialidade) VALUES (?, ?)',
       [nome, especialidade]
     );
     return { insertId: (result as ResultSetHeader).insertId };
