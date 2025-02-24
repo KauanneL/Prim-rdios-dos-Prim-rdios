@@ -10,3 +10,18 @@ export async function getConsulta(req: Request, res: Response) {
       res.status(500).json({ message: 'Erro ao buscar consulta' });
     }
   }
+  export async function criarPaciente(req: Request, res: Response): Promise<any> {
+    const { paciente_id, medico_id, sala, data, horario } = req.body;
+  
+    // Verifica se todos os campos obrigatórios estão presentes
+    if (!paciente_id || !medico_id || !sala || !data || !horario) {
+      return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+    }
+  
+    try {
+      const result = await ConsultaModel.criarConsulta(paciente_id, medico_id, sala, data, horario);
+      return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao criar consulta' }); // 'return' aqui também
+    }
+  }
