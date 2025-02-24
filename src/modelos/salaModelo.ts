@@ -14,7 +14,7 @@ const pool = mysql.createPool({
 
 export async function getSala() {
   try {
-    const [rows] = await pool.execute('SELECT * FROM sala');
+    const [rows] = await pool.execute('SELECT * FROM salas');
     return rows;
   } catch (error) {
     console.error('Erro ao obter salas:', error);
@@ -33,7 +33,7 @@ export async function criarSala(
   }
   try {
     const [result] = await pool.execute(
-      'INSERT INTO sala (numero, data, horario, status) VALUES (?, ?, ?, ?)',
+      'INSERT INTO salas (numero, data, horario, status) VALUES (?, ?, ?, ?)',
       [numero, data, horario, status]
     );
     return { insertId: (result as ResultSetHeader).insertId };

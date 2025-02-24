@@ -20,3 +20,19 @@ export function getProntuario(req, res) {
         }
     });
 }
+export function criarProntuario(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { paciente_id, historico } = req.body;
+        // Verifica se todos os campos obrigatórios estão presentes
+        if (!paciente_id || !historico) {
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+        }
+        try {
+            const result = yield ProntuarioModel.criarProntuario(paciente_id, historico);
+            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+        }
+        catch (error) {
+            return res.status(500).json({ message: 'Erro ao criar prontuário' }); // 'return' aqui também
+        }
+    });
+}

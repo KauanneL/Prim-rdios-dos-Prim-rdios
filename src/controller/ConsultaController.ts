@@ -10,7 +10,7 @@ export async function getConsulta(req: Request, res: Response) {
       res.status(500).json({ message: 'Erro ao buscar consulta' });
     }
   }
-  export async function criarPaciente(req: Request, res: Response): Promise<any> {
+  export async function criarConsulta(req: Request, res: Response): Promise<any> {
     const { paciente_id, medico_id, sala, data, horario } = req.body;
   
     // Verifica se todos os campos obrigatórios estão presentes

@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as SalaModel from '../modelos/salaModelo';
-export function getMedicos(req, res) {
+import * as SalaModel from '../modelos/salaModelo.js';
+export function getSala(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const sala = yield SalaModel.getSala();
@@ -16,6 +16,22 @@ export function getMedicos(req, res) {
         }
         catch (error) {
             res.status(500).json({ message: 'Erro ao buscar médico' });
+        }
+    });
+}
+export function criarSala(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { numero, data, horario, status } = req.body;
+        // Verifica se todos os campos obrigatórios estão presentes
+        if (!numero || !data || !horario || !status) {
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+        }
+        try {
+            const result = yield SalaModel.criarSala(numero, data, horario, status);
+            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+        }
+        catch (error) {
+            return res.status(500).json({ message: 'Erro ao criar sala' }); // 'return' aqui também
         }
     });
 }

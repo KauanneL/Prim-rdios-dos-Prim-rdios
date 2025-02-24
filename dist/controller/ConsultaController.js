@@ -20,3 +20,19 @@ export function getConsulta(req, res) {
         }
     });
 }
+export function criarConsulta(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { paciente_id, medico_id, sala, data, horario } = req.body;
+        // Verifica se todos os campos obrigatórios estão presentes
+        if (!paciente_id || !medico_id || !sala || !data || !horario) {
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+        }
+        try {
+            const result = yield ConsultaModel.criarConsulta(paciente_id, medico_id, sala, data, horario);
+            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+        }
+        catch (error) {
+            return res.status(500).json({ message: 'Erro ao criar consulta' }); // 'return' aqui também
+        }
+    });
+}

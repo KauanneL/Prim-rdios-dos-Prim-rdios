@@ -20,7 +20,7 @@ const pool = mysql.createPool({
 export function getSala() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [rows] = yield pool.execute('SELECT * FROM sala');
+            const [rows] = yield pool.execute('SELECT * FROM salas');
             return rows;
         }
         catch (error) {
@@ -35,7 +35,7 @@ export function criarSala(numero, data, horario, status) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO sala (numero, data, horario, status) VALUES (?, ?, ?, ?)', [numero, data, horario, status]);
+            const [result] = yield pool.execute('INSERT INTO salas (numero, data, horario, status) VALUES (?, ?, ?, ?)', [numero, data, horario, status]);
             return { insertId: result.insertId };
         }
         catch (error) {
