@@ -1,10 +1,9 @@
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
 
 dotenv.config();
 
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -13,13 +12,31 @@ const pool = mysql.createPool({
   port: Number(process.env.DB_PORT),
 });
 
-// Função para obter todos os alunos
-export async function getMedicos() {
+export async function getMedico() {
   try {
-    const [rows] = await pool.execute('SELECT * FROM medicos');
+    const [rows] = await pool.execute('SELECT * FROM medico');
     return rows;
   } catch (error) {
-    console.error('Erro ao obter paciente:', error);
-    throw new Error('Erro ao obter dados dos paciente');
+    console.error('Erro ao obter médicos:', error);
+    throw new Error('Erro ao obter dados dos médicos');
+  }
+}
+
+export async function criarMedico(
+  nome: string, 
+  especialidade: string, 
+) {
+  if (!nome || !especialidade) {
+    throw new Error('Campos obrigatórios não preenchidos');
+  }
+  try {
+    const [result] = await pool.execute(
+      'INSERT INTO medico (nome, especialidade) VALUES (?, ?)',
+      [nome, especialidade]
+    );
+    return { insertId: (result as ResultSetHeader).insertId };
+  } catch (error) {
+    console.error('Erro ao criar médico:', error);
+    throw new Error('Erro ao inserir dados do médico');
   }
 }

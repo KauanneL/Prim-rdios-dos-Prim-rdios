@@ -1,9 +1,9 @@
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
+
 dotenv.config();
 
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -12,13 +12,33 @@ const pool = mysql.createPool({
   port: Number(process.env.DB_PORT),
 });
 
-// Função para obter todos os alunos
 export async function getSala() {
   try {
     const [rows] = await pool.execute('SELECT * FROM sala');
     return rows;
   } catch (error) {
-    console.error('Erro ao obter sala:', error);
-    throw new Error('Erro ao obter dados da sala');
+    console.error('Erro ao obter salas:', error);
+    throw new Error('Erro ao obter dados das salas');
+  }
+}
+
+export async function criarSala(
+  numero: string, 
+  data: string,  
+  horario: string, 
+  status: string
+) {
+  if (!numero || !data || !horario || !status) {
+    throw new Error('Campos obrigatórios não preenchidos');
+  }
+  try {
+    const [result] = await pool.execute(
+      'INSERT INTO sala (numero, data, horario, status) VALUES (?, ?, ?, ?)',
+      [numero, data, horario, status]
+    );
+    return { insertId: (result as ResultSetHeader).insertId };
+  } catch (error) {
+    console.error('Erro ao criar sala:', error);
+    throw new Error('Erro ao inserir dados da sala');
   }
 }

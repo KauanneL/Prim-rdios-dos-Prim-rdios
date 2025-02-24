@@ -1,9 +1,11 @@
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
+import { Paciente } from '../models/Paciente';
+
 dotenv.config();
 
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -12,7 +14,6 @@ const pool = mysql.createPool({
   port: Number(process.env.DB_PORT),
 });
 
-// Função para obter todos os alunos
 export async function getProntuario() {
   try {
     const [rows] = await pool.execute('SELECT * FROM prontuario');
@@ -20,5 +21,24 @@ export async function getProntuario() {
   } catch (error) {
     console.error('Erro ao obter prontuário:', error);
     throw new Error('Erro ao obter dados do prontuário');
+  }
+}
+
+export async function criarProntuario(
+  paciente_id: Paciente, 
+  historico: string,
+) {
+  if (!paciente_id || !historico) {
+    throw new Error('Campos obrigatórios não preenchidos');
+  }
+  try {
+    const [result] = await pool.execute(
+      'INSERT INTO prontuario (paciente_id, historico) VALUES (?, ?)',
+      [paciente_id, historico]
+    );
+    return { insertId: (result as ResultSetHeader).insertId };
+  } catch (error) {
+    console.error('Erro ao criar prontuário:', error);
+    throw new Error('Erro ao inserir dados do prontuário');
   }
 }
