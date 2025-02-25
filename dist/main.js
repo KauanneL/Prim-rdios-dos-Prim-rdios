@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,35 +9,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var _a;
-import axios from "axios";
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/paciente");
-        return response.data;
+        const response = yield fetch("http://localhost:3000/api/paciente");
+        return response.json();
     });
 }
 function fetchMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/medicos");
-        return response.data;
+        const response = yield fetch("http://localhost:3000/api/medicos");
+        return response.json();
     });
 }
 function fetchConsultas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/consultas");
-        return response.data;
+        const response = yield fetch("http://localhost:3000/api/consultas");
+        return response.json();
     });
 }
 function fetchProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/prontuarios");
-        return response.data;
+        const response = yield fetch("http://localhost:3000/api/prontuarios");
+        return response.json();
     });
 }
 function fetchSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/salas");
-        return response.data;
+        const response = yield fetch("http://localhost:3000/api/salas");
+        return response.json();
     });
 }
 function atualizarListaPacientes() {
@@ -140,7 +140,13 @@ function exibirProntuarios() {
     const nome = (_a = document.getElementById("pacienteNome")) === null || _a === void 0 ? void 0 : _a.value;
     const idade = parseInt((_b = document.getElementById("pacienteIdade")) === null || _b === void 0 ? void 0 : _b.value);
     const telefone = (_c = document.getElementById("pacienteTelefone")) === null || _c === void 0 ? void 0 : _c.value;
-    yield axios.post("http://localhost:3000/pacientes", { nome, idade, telefone });
+    yield fetch("http://localhost:3000/pacientes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ nome, idade, telefone })
+    });
     document.getElementById("pacienteNome").value = "";
     document.getElementById("pacienteIdade").value = "";
     document.getElementById("pacienteTelefone").value = "";

@@ -1,1 +1,12 @@
-export {};
+declare function fetchPacientes(): Promise<any[]>;
+declare function fetchMedicos(): Promise<any[]>;
+declare function fetchConsultas(): Promise<any[]>;
+declare function fetchProntuarios(): Promise<any[]>;
+declare function fetchSalas(): Promise<any[]>;
+declare function atualizarListaPacientes(): Promise<void>;
+declare function atualizarListaMedicos(): Promise<void>;
+declare function atualizarListaProntuarios(): Promise<void>;
+declare function exibirPacientes(): Promise<void>;
+declare function exibirConsultas(): Promise<void>;
+declare function exibirSalas(): Promise<void>;
+declare function exibirProntuarios(): Promise<void>;
