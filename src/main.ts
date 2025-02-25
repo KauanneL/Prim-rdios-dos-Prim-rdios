@@ -1,28 +1,26 @@
-import axios from "axios";
-
-async function fetchPacientes() {
-  const response = await axios.get("http://localhost:3000/api/paciente");
-  return response.data;
+async function fetchPacientes(): Promise<any[]> {
+  const response = await fetch("http://localhost:3000/api/paciente");
+  return response.json();
 }
 
-async function fetchMedicos() {
-  const response = await axios.get("http://localhost:3000/api/medicos");
-  return response.data;
+async function fetchMedicos(): Promise<any[]> {
+  const response = await fetch("http://localhost:3000/api/medicos");
+  return response.json();
 }
 
-async function fetchConsultas() {
-  const response = await axios.get("http://localhost:3000/api/consultas");
-  return response.data;
+async function fetchConsultas(): Promise<any[]> {
+  const response = await fetch("http://localhost:3000/api/consultas");
+  return response.json();
 }
 
-async function fetchProntuarios() {
-  const response = await axios.get("http://localhost:3000/api/prontuarios");
-  return response.data;
+async function fetchProntuarios(): Promise<any[]> {
+  const response = await fetch("http://localhost:3000/api/prontuarios");
+  return response.json();
 }
 
-async function fetchSalas() {
-  const response = await axios.get("http://localhost:3000/api/salas");
-  return response.data;
+async function fetchSalas(): Promise<any[]> {
+  const response = await fetch("http://localhost:3000/api/salas");
+  return response.json();
 }
 
 async function atualizarListaPacientes() {
@@ -128,7 +126,13 @@ document.getElementById("pacienteForm")?.addEventListener("submit", async (event
   const idade = parseInt((document.getElementById("pacienteIdade") as HTMLInputElement)?.value);
   const telefone = (document.getElementById("pacienteTelefone") as HTMLInputElement)?.value;
 
-  await axios.post("http://localhost:3000/pacientes", { nome, idade, telefone });
+  await fetch("http://localhost:3000/pacientes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nome, idade, telefone })
+  });
 
   (document.getElementById("pacienteNome") as HTMLInputElement).value = "";
   (document.getElementById("pacienteIdade") as HTMLInputElement).value = "";
@@ -145,6 +149,7 @@ exibirPacientes();
 exibirConsultas();
 exibirSalas();
 exibirProntuarios();
+
 
 
 
