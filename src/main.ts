@@ -1,27 +1,27 @@
 import axios from "axios";
 
 async function fetchPacientes() {
-  const response = await axios.get("http://localhost:3000/pacientes");
+  const response = await axios.get("http://localhost:3000/api/pacientes");
   return response.data;
 }
 
 async function fetchMedicos() {
-  const response = await axios.get("http://localhost:3000/medicos");
+  const response = await axios.get("http://localhost:3000/api/medicos");
   return response.data;
 }
 
 async function fetchConsultas() {
-  const response = await axios.get("http://localhost:3000/consultas");
+  const response = await axios.get("http://localhost:3000/api/consultas");
   return response.data;
 }
 
 async function fetchProntuarios() {
-  const response = await axios.get("http://localhost:3000/prontuarios");
+  const response = await axios.get("http://localhost:3000/api/prontuarios");
   return response.data;
 }
 
 async function fetchSalas() {
-  const response = await axios.get("http://localhost:3000/salas");
+  const response = await axios.get("http://localhost:3000/api/salas");
   return response.data;
 }
 

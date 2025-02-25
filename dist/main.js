@@ -11,31 +11,31 @@ var _a;
 import axios from "axios";
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/pacientes");
+        const response = yield axios.get("http://localhost:3000/api/pacientes");
         return response.data;
     });
 }
 function fetchMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/medicos");
+        const response = yield axios.get("http://localhost:3000/api/medicos");
         return response.data;
     });
 }
 function fetchConsultas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/consultas");
+        const response = yield axios.get("http://localhost:3000/api/consultas");
         return response.data;
     });
 }
 function fetchProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/prontuarios");
+        const response = yield axios.get("http://localhost:3000/api/prontuarios");
         return response.data;
     });
 }
 function fetchSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/salas");
+        const response = yield axios.get("http://localhost:3000/api/salas");
         return response.data;
     });
 }
