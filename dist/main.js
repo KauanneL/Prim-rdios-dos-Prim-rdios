@@ -11,7 +11,7 @@ var _a;
 import axios from "axios";
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios.get("http://localhost:3000/api/pacientes");
+        const response = yield axios.get("http://localhost:3000/api/paciente");
         return response.data;
     });
 }
