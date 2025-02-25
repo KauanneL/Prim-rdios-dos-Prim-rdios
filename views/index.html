@@ -14,7 +14,7 @@
       <ul>
         <li><a href="#cadastrarpacientes">Cadastrar Pacientes 🙋</a></li>
         <li><a href="#agendarconsultas">Agendar Consultas 🗒️</a></li>
-        <li><a href="#gerenciarsalas">ocupação de Salas 🚪</a></li>
+        <li><a href="#gerenciarsalas">Ocupação de Salas 🚪</a></li>
         <li><a href="#digitarprontuarios">Digitar Prontuários 🖋️</a></li>
         <li><a href="#consultasAgendadas">Consultas Agendadas ✍️🗒️</a></li>
         <li><a href="#pacientesProntuarios">Pacientes e Prontuários 🙋🖋️</a></li>
@@ -32,8 +32,7 @@
           <input type="text" id="pacienteTelefone" placeholder="Telefone" required>
           <button type="submit">Cadastrar Paciente</button>
         </form>
-        <div id="pacienteList">
-        </div>
+        <div id="pacienteList"></div>
       </div>
     </section>
 
@@ -46,29 +45,9 @@
           </select>
           <select id="consultaMedico" required>
             <option value="">Selecione o Médico</option>
-            <option value="Cardiologista">Dr. Gustavo Almeida - Cardiologista</option>
-            <option value="Clínico Geral">Dr. Tiago Varela - Clínico Geral</option>
-            <option value="Dermatologista">Dra. Mariana Soares - Dermatologista</option>
-            <option value="Endocrinologista">Dra. Ana Beatriz Costa - Endocrinologista</option>
-            <option value="Ginecologista">Dra. Camila Santos - Ginecologista</option>
-            <option value="Neurologista">Dr. Ricardo Martins - Neurologista</option>
-            <option value="Oftalmologista">Dr. João Vieira - Oftalmologista</option>
-            <option value="Ortopedista">Dr. Carlos Mendes - Ortopedista</option>
-            <option value="Pediatra">Dra. Fernanda Oliveira - Pediatra</option>
-            <option value="Psiquiatra">Dra. Letícia Ferreira - Psiquiatra</option>
-            <option value="Urologista">Dr. Pedro Rocha - Urologista</option>
-            
           </select>
           <select id="consultaSala" required>
             <option value="">Selecione a Sala</option>
-            <option value="Consultório 1">Consultório 1</option>
-            <option value="Consultório 2">Consultório 2</option>
-            <option value="Consultório 3">Consultório 3</option>
-            <option value="Consultório 4">Consultório 4</option>
-            <option value="Leito 1">Leito 1</option>
-            <option value="Leito 2">Leito 2</option>
-            <option value="Leito 3">Leito 3</option>
-            <option value="Leito 4">Leito 4</option>
           </select>
           <input type="date" id="consultaData" required>
           <input type="time" id="consultaHorario" required>
@@ -104,8 +83,7 @@
               <th>Sala</th>
             </tr>
           </thead>
-          <tbody id="consultasAgendadasList">
-          </tbody>
+          <tbody id="consultasAgendadasList"></tbody>
         </table>
       </div>
     </section>
@@ -123,8 +101,7 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody id="salasList">
-          </tbody>
+          <tbody id="salasList"></tbody>
         </table>
       </div>
     </section>
@@ -139,8 +116,7 @@
               <th>Prontuário</th>
             </tr>
           </thead>
-          <tbody id="pacientesProntuariosList">
-          </tbody>
+          <tbody id="pacientesProntuariosList"></tbody>
         </table>
       </div>
     </section>
