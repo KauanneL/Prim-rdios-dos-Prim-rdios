@@ -25,9 +25,9 @@ app.use(express.json()); // Para manipular requisições JSON
 // Configuração das rotas
 app.use('/api/paciente', pacienteRouter);
 app.use('/api/medicos', medicoRouter);
-app.use('/api/consulta', ConsultaRouter);
-app.use('/api/sala', SalaRouter);
-app.use('/api/prontuario', ProntuarioRouter);
+app.use('/api/consultas', ConsultaRouter);
+app.use('/api/salas', SalaRouter);
+app.use('/api/prontuarios', ProntuarioRouter);
 
 app.use(express.static(path.join(__dirname, "../views")));
 app.use(express.static(path.join(__dirname)));
