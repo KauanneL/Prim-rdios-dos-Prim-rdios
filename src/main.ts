@@ -126,7 +126,7 @@ document.getElementById("pacienteForm")?.addEventListener("submit", async (event
   const idade = parseInt((document.getElementById("pacienteIdade") as HTMLInputElement)?.value);
   const telefone = (document.getElementById("pacienteTelefone") as HTMLInputElement)?.value;
 
-  await fetch("http://localhost:3000/pacientes", {
+  await fetch("http://localhost:3000/api/paciente", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
