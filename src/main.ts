@@ -1,5 +1,5 @@
 async function fetchPacientes(): Promise<any[]> {
-  const response = await fetch('http://localhost:5500/api/paciente');
+  const response = await fetch('http://localhost:3000/api/paciente');
   return response.json();
 }
 
