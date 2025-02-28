@@ -149,13 +149,3 @@ exibirPacientes();
 exibirConsultas();
 exibirSalas();
 exibirProntuarios();
-
-
-
-
-
-
-
-
-
-
