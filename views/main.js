@@ -23,19 +23,19 @@ function fetchMedicos() {
 }
 function fetchConsultas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/consulta');
+        const response = yield fetch('http://localhost:3000/api/consultas');
         return response.json();
     });
 }
 function fetchProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/prontuario');
+        const response = yield fetch('http://localhost:3000/api/prontuarios');
         return response.json();
     });
 }
 function fetchSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/sala');
+        const response = yield fetch('http://localhost:3000/api/salas');
         return response.json();
     });
 }
@@ -115,15 +115,12 @@ function exibirConsultas() {
 function exibirSalas() {
     return __awaiter(this, void 0, void 0, function* () {
         const salas = yield fetchSalas();
-        console.log(salas);
         const salasList = document.getElementById("salasList");
         if (!salasList)
             return;
         salasList.innerHTML = salas
-            .map((s, index) => `<tr><td>${index + 1}</td><td>${s.consultorio}</td></tr>`)
+            .map((s, index) => `<tr><td>${index + 1}</td><td>${s.numero}</td><td>${s.data}</td><td>${s.horario}</td><td>${s.status}</td></tr>`)
             .join("");
-        console.log(salas.map((s, index) => `<tr><td>${index + 1}</td><td>${s.numero}</td><td>${s.data}</td><td>${s.horario}</td><td>${s.status}</td></tr>`)
-        .join(""));
     });
 }
 function exibirProntuarios() {
