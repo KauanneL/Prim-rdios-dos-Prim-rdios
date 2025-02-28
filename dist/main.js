@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var _a;
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:5500/api/paciente');
+        const response = yield fetch('http://localhost:3000/api/paciente');
         return response.json();
     });
 }
