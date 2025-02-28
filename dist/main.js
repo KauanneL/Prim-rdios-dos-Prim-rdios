@@ -11,31 +11,61 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var _a;
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/paciente");
+        const response = yield fetch('http://localhost:5500/api/paciente', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         return response.json();
     });
 }
 function fetchMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/medicos");
+        const response = yield fetch('http://localhost:3000/api/medicos', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         return response.json();
     });
 }
 function fetchConsultas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/consultas");
+        const response = yield fetch('http://localhost:3000/api/consultas', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         return response.json();
     });
 }
 function fetchProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/prontuarios");
+        const response = yield fetch('http://localhost:3000/api/prontuarios', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         return response.json();
     });
 }
 function fetchSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/salas");
+        const response = yield fetch('http://localhost:3000/api/salas', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         return response.json();
     });
 }
@@ -140,7 +170,7 @@ function exibirProntuarios() {
     const nome = (_a = document.getElementById("pacienteNome")) === null || _a === void 0 ? void 0 : _a.value;
     const idade = parseInt((_b = document.getElementById("pacienteIdade")) === null || _b === void 0 ? void 0 : _b.value);
     const telefone = (_c = document.getElementById("pacienteTelefone")) === null || _c === void 0 ? void 0 : _c.value;
-    yield fetch("http://localhost:3000/pacientes", {
+    yield fetch("http://localhost:3000/api/paciente", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

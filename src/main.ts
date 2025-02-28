@@ -1,55 +1,25 @@
 async function fetchPacientes(): Promise<any[]> {
-  const response = await fetch('http://localhost:5500/api/paciente', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('http://localhost:5500/api/paciente');
   return response.json();
 }
 
 async function fetchMedicos(): Promise<any[]> {
-  const response = await fetch('http://localhost:3000/api/medicos',  {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('http://localhost:3000/api/medicos');
   return response.json();
 }
 
 async function fetchConsultas(): Promise<any[]> {
-  const response = await fetch('http://localhost:3000/api/consultas',  {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('http://localhost:3000/api/consultas');
   return response.json();
 }
 
 async function fetchProntuarios(): Promise<any[]> {
-  const response = await fetch('http://localhost:3000/api/prontuarios',  {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('http://localhost:3000/api/prontuarios');
   return response.json();
 }
 
 async function fetchSalas(): Promise<any[]> {
-  const response = await fetch('http://localhost:3000/api/salas',  {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('http://localhost:3000/api/salas');
   return response.json();
 }
 
