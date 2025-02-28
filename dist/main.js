@@ -11,61 +11,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var _a;
 function fetchPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:5500/api/paciente', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = yield fetch('http://localhost:5500/api/paciente');
         return response.json();
     });
 }
 function fetchMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/medicos', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = yield fetch('http://localhost:3000/api/medicos');
         return response.json();
     });
 }
 function fetchConsultas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/consultas', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = yield fetch('http://localhost:3000/api/consultas');
         return response.json();
     });
 }
 function fetchProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/prontuarios', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = yield fetch('http://localhost:3000/api/prontuarios');
         return response.json();
     });
 }
 function fetchSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch('http://localhost:3000/api/salas', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = yield fetch('http://localhost:3000/api/salas');
         return response.json();
     });
 }
