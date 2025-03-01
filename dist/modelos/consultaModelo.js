@@ -20,7 +20,7 @@ const pool = mysql.createPool({
 export function getConsulta() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [rows] = yield pool.execute('SELECT * FROM consulta');
+            const [rows] = yield pool.execute('SELECT * FROM consultas');
             return rows;
         }
         catch (error) {

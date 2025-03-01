@@ -20,7 +20,7 @@ const pool = mysql.createPool({
 export function getProntuario() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [rows] = yield pool.execute('SELECT * FROM prontuario');
+            const [rows] = yield pool.execute('SELECT * FROM prontuarios');
             return rows;
         }
         catch (error) {
