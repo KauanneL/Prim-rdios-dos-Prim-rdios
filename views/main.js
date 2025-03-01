@@ -26,8 +26,8 @@ function carregarPacientes() {
             selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
             selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
             pacientes.forEach((paciente) => {
-                const option1 = new Option(paciente.nome, paciente.id);
-                const option2 = new Option(paciente.nome, paciente.id);
+                const option1 = new Option(paciente.nome, paciente.idade, paciente.numero);
+                const option2 = new Option(paciente.nome, paciente.idade, paciente.numero);
                 selectPaciente.add(option1);
                 selectProntuario.add(option2);
             });
