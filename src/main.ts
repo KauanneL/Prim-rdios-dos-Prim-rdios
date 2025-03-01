@@ -6,45 +6,61 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function carregarPacientes() {
-  const response = await fetch("http://localhost:3000/api/paciente");
-  const pacientes = await response.json();
-  
-  const selectPaciente = document.getElementById("consultaPaciente") as HTMLSelectElement;
-  const selectProntuario = document.getElementById("prontuarioPaciente") as HTMLSelectElement;
-  selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
-  selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
-  
-  pacientes.forEach((paciente: any) => {
-    const option = new Option(paciente.nome, paciente.id);
-    selectPaciente.add(option.cloneNode(true) as HTMLOptionElement);
-    selectProntuario.add(option);
-  });
+  try {
+    const response = await fetch("http://localhost:3000/api/paciente");
+    if (!response.ok) throw new Error("Erro ao carregar pacientes");
+    const pacientes = await response.json();
+    
+    const selectPaciente = document.getElementById("consultaPaciente") as HTMLSelectElement;
+    const selectProntuario = document.getElementById("prontuarioPaciente") as HTMLSelectElement;
+    selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
+    selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
+    
+    pacientes.forEach((paciente: any) => {
+      const option1 = new Option(paciente.nome, paciente.id);
+      const option2 = new Option(paciente.nome, paciente.id);
+      selectPaciente.add(option1);
+      selectProntuario.add(option2);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar pacientes:", error);
+  }
 }
 
 async function carregarMedicos() {
-  const response = await fetch("http://localhost:3000/api/medicos");
-  const medicos = await response.json();
-  
-  const selectMedico = document.getElementById("consultaMedico") as HTMLSelectElement;
-  selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
-  
-  medicos.forEach((medico: any) => {
-    const option = new Option(medico.nome, medico.id);
-    selectMedico.add(option);
-  });
+  try {
+    const response = await fetch("http://localhost:3000/api/medicos");
+    if (!response.ok) throw new Error("Erro ao carregar médicos");
+    const medicos = await response.json();
+    
+    const selectMedico = document.getElementById("consultaMedico") as HTMLSelectElement;
+    selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
+    
+    medicos.forEach((medico: any) => {
+      const option = new Option(medico.nome, medico.id);
+      selectMedico.add(option);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar médicos:", error);
+  }
 }
 
 async function carregarSalas() {
-  const response = await fetch("http://localhost:3000/api/salas");
-  const salas = await response.json();
-  
-  const selectSala = document.getElementById("consultaSala") as HTMLSelectElement;
-  selectSala.innerHTML = "<option value=''>Selecione a Sala</option>";
-  
-  salas.forEach((sala: any) => {
-    const option = new Option(sala.nome, sala.id);
-    selectSala.add(option);
-  });
+  try {
+    const response = await fetch("http://localhost:3000/api/salas");
+    if (!response.ok) throw new Error("Erro ao carregar salas");
+    const salas = await response.json();
+    
+    const selectSala = document.getElementById("consultaSala") as HTMLSelectElement;
+    selectSala.innerHTML = "<option value=''>Selecione a Sala</option>";
+    
+    salas.forEach((sala: any) => {
+      const option = new Option(sala.nome, sala.id);
+      selectSala.add(option);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar salas:", error);
+  }
 }
 
 function configurarFormularios() {
@@ -61,7 +77,7 @@ function configurarFormularios() {
       body: JSON.stringify({ nome, idade, telefone })
     });
     pacienteForm.reset();
-    carregarPacientes();
+    await carregarPacientes();
   });
 
   const consultaForm = document.getElementById("consultaForm") as HTMLFormElement;
@@ -95,3 +111,4 @@ function configurarFormularios() {
     prontuarioForm.reset();
   });
 }
+
