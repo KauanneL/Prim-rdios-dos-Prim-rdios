@@ -15,7 +15,7 @@ const pool = mysql.createPool({
 
 export async function getConsulta() {
   try {
-    const [rows] = await pool.execute('SELECT * FROM consulta');
+    const [rows] = await pool.execute('SELECT * FROM consultas');
     return rows;
   } catch (error) {
     console.error('Erro ao obter consultas:', error);

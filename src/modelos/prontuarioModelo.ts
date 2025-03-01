@@ -15,7 +15,7 @@ const pool = mysql.createPool({
 
 export async function getProntuario() {
   try {
-    const [rows] = await pool.execute('SELECT * FROM prontuario');
+    const [rows] = await pool.execute('SELECT * FROM prontuarios');
     return rows;
   } catch (error) {
     console.error('Erro ao obter prontuário:', error);
