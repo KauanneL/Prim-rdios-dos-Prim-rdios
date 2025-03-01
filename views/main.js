@@ -16,41 +16,63 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/paciente");
-        const pacientes = yield response.json();
-        const selectPaciente = document.getElementById("consultaPaciente");
-        const selectProntuario = document.getElementById("prontuarioPaciente");
-        selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
-        selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
-        pacientes.forEach((paciente) => {
-            const option = new Option(paciente.nome, paciente.id);
-            selectPaciente.add(option.cloneNode(true));
-            selectProntuario.add(option);
-        });
+        try {
+            const response = yield fetch("http://localhost:3000/api/paciente");
+            if (!response.ok)
+                throw new Error("Erro ao carregar pacientes");
+            const pacientes = yield response.json();
+            const selectPaciente = document.getElementById("consultaPaciente");
+            const selectProntuario = document.getElementById("prontuarioPaciente");
+            selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
+            selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
+            pacientes.forEach((paciente) => {
+                const option1 = new Option(paciente.nome, paciente.id);
+                const option2 = new Option(paciente.nome, paciente.id);
+                selectPaciente.add(option1);
+                selectProntuario.add(option2);
+            });
+        }
+        catch (error) {
+            console.error("Erro ao carregar pacientes:", error);
+        }
     });
 }
 function carregarMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/medicos");
-        const medicos = yield response.json();
-        const selectMedico = document.getElementById("consultaMedico");
-        selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
-        medicos.forEach((medico) => {
-            const option = new Option(medico.nome, medico.id);
-            selectMedico.add(option);
-        });
+        try {
+            const response = yield fetch("http://localhost:3000/api/medicos");
+            if (!response.ok)
+                throw new Error("Erro ao carregar médicos");
+            const medicos = yield response.json();
+            const selectMedico = document.getElementById("consultaMedico");
+            selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
+            medicos.forEach((medico) => {
+                const option = new Option(medico.nome, medico.id);
+                selectMedico.add(option);
+            });
+        }
+        catch (error) {
+            console.error("Erro ao carregar médicos:", error);
+        }
     });
 }
 function carregarSalas() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch("http://localhost:3000/api/salas");
-        const salas = yield response.json();
-        const selectSala = document.getElementById("consultaSala");
-        selectSala.innerHTML = "<option value=''>Selecione a Sala</option>";
-        salas.forEach((sala) => {
-            const option = new Option(sala.nome, sala.id);
-            selectSala.add(option);
-        });
+        try {
+            const response = yield fetch("http://localhost:3000/api/salas");
+            if (!response.ok)
+                throw new Error("Erro ao carregar salas");
+            const salas = yield response.json();
+            const selectSala = document.getElementById("consultaSala");
+            selectSala.innerHTML = "<option value=''>Selecione a Sala</option>";
+            salas.forEach((sala) => {
+                const option = new Option(sala.nome, sala.id);
+                selectSala.add(option);
+            });
+        }
+        catch (error) {
+            console.error("Erro ao carregar salas:", error);
+        }
     });
 }
 function configurarFormularios() {
@@ -66,7 +88,7 @@ function configurarFormularios() {
             body: JSON.stringify({ nome, idade, telefone })
         });
         pacienteForm.reset();
-        carregarPacientes();
+        yield carregarPacientes();
     }));
     const consultaForm = document.getElementById("consultaForm");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
@@ -96,4 +118,3 @@ function configurarFormularios() {
         prontuarioForm.reset();
     }));
 }
-
