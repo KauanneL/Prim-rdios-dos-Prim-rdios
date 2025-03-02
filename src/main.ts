@@ -100,9 +100,9 @@ function configurarFormularios() {
   consultaForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const paciente_Id = (document.getElementById("consultaPaciente") as HTMLSelectElement).value;
-      const medico_Id = (document.getElementById("consultaMedico") as HTMLSelectElement).value;
-      const sala_Id = (document.getElementById("consultaSala") as HTMLSelectElement).value;
+      const paciente_id = (document.getElementById("consultaPaciente") as HTMLSelectElement).value;
+      const medico_id = (document.getElementById("consultaMedico") as HTMLSelectElement).value;
+      const sala_id = (document.getElementById("consultaSala") as HTMLSelectElement).value;
       const data = (document.getElementById("consultaData") as HTMLInputElement).value;
       const horario = (document.getElementById("consultaHorario") as HTMLInputElement).value;
 
@@ -110,7 +110,7 @@ function configurarFormularios() {
           const response = await fetch("http://localhost:3000/api/consultas", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ paciente_Id, medico_Id, sala_Id, data, horario }),
+              body: JSON.stringify({ paciente_id, medico_id, sala_id, data, horario }),
           });
 
           if (!response.ok) throw new Error("Erro ao cadastrar consulta");
@@ -128,14 +128,14 @@ function configurarFormularios() {
   prontuarioForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const paciente_Id = (document.getElementById("prontuarioPaciente") as HTMLSelectElement).value;
-      const historico = (document.getElementById("prontuarioTexto") as HTMLTextAreaElement).value;
+      const paciente_id = (document.getElementById("prontuarioPaciente") as HTMLSelectElement).value;
+      const histórico = (document.getElementById("prontuarioTexto") as HTMLTextAreaElement).value;
 
       try {
           const response = await fetch("http://localhost:3000/api/prontuarios", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ paciente_Id, historico }),
+              body: JSON.stringify({ paciente_id, histórico }),
           });
 
           if (!response.ok) throw new Error("Erro ao cadastrar prontuário");
