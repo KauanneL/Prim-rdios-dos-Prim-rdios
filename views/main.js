@@ -47,7 +47,7 @@ function carregarMedicos() {
             const selectMedico = document.getElementById("consultaMedico");
             selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
             medicos.forEach((medico) => {
-                const option = new Option(medico.id, medico.nome, medico.especialidade);
+                const option = new Option(medico.nome, medico.especialidade);
                 selectMedico.add(option);
             });
         }
