@@ -26,17 +26,17 @@ export async function getConsulta() {
 export async function criarConsulta(
   paciente_id: number,
   medico_id: number,
-  sala: string,
+  sala_id: string,
   data: string, 
   horario: string, 
 ) {
-  if (!paciente_id || !medico_id || !sala || !data || !horario) {
+  if (!paciente_id || !medico_id || !sala_id || !data || !horario) {
     throw new Error('Campos obrigatórios não preenchidos');
   }
   try {
     const [result] = await pool.execute(
       'INSERT INTO consulta (paciente_id, medico_id, sala, data, horario) VALUES (?, ?, ?, ?, ?)',
-      [paciente_id, medico_id, sala, data, horario]
+      [paciente_id, medico_id, sala_id, data, horario]
     );
     return { insertId: (result as ResultSetHeader).insertId };
   } catch (error) {
