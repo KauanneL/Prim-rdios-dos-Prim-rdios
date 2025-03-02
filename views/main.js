@@ -156,7 +156,7 @@ async function carregarConsultasAgendadas() {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${index + 1}</td>
-                <td>${consulta.paciente.nome}</td>
+                <td>${consulta.paciente_id}</td>
                 <td>${consulta.medico_id}</td>
                 <td>${consulta.data}</td>
                 <td>${consulta.horario}</td>
