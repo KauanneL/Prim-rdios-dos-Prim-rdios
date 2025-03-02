@@ -29,13 +29,13 @@ export function getConsulta() {
         }
     });
 }
-export function criarConsulta(paciente_id, medico_id, sala, data, horario) {
+export function criarConsulta(paciente_id, medico_id, sala_id, data, horario) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!paciente_id || !medico_id || !sala || !data || !horario) {
+        if (!paciente_id || !medico_id || !sala_id || !data || !horario) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO consulta (paciente_id, medico_id, sala, data, horario) VALUES (?, ?, ?, ?, ?)', [paciente_id, medico_id, sala, data, horario]);
+            const [result] = yield pool.execute('INSERT INTO consulta (paciente_id, medico_id, sala, data, horario) VALUES (?, ?, ?, ?, ?)', [paciente_id, medico_id, sala_id, data, horario]);
             return { insertId: result.insertId };
         }
         catch (error) {

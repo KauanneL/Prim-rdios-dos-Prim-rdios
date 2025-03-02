@@ -35,7 +35,7 @@ export async function criarConsulta(
   }
   try {
     const [result] = await pool.execute(
-      'INSERT INTO consulta (paciente_id, medico_id, sala, data, horario) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO consultas (paciente_id, medico_id, sala, data_id, horario) VALUES (?, ?, ?, ?, ?)',
       [paciente_id, medico_id, sala_id, data, horario]
     );
     return { insertId: (result as ResultSetHeader).insertId };
