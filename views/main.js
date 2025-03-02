@@ -93,15 +93,15 @@ function configurarFormularios() {
     const consultaForm = document.getElementById("consultaForm");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        const pacienteId = document.getElementById("consultaPaciente").value;
-        const medicoId = document.getElementById("consultaMedico").value;
-        const salaId = document.getElementById("consultaSala").value;
+        const paciente_Id = document.getElementById("consultaPaciente").value;
+        const medico_Id = document.getElementById("consultaMedico").value;
+        const sala_Id = document.getElementById("consultaSala").value;
         const data = document.getElementById("consultaData").value;
         const horario = document.getElementById("consultaHorario").value;
         yield fetch("http://localhost:3000/api/consultas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ pacienteId, medicoId, salaId, data, horario })
+            body: JSON.stringify({ paciente_Id, medico_Id, sala_Id, data, horario })
         });
         consultaForm.reset();
     }));
