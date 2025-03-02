@@ -81,12 +81,12 @@ function configurarFormularios() {
         event.preventDefault();
         const nome = document.getElementById("pacienteNome").value;
         const idade = document.getElementById("pacienteIdade").value;
-        const telefone = document.getElementById("pacienteTelefone").value;
+        const numero = document.getElementById("pacienteTelefone").value;
         try {
             const response = yield fetch("http://localhost:3000/api/paciente", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, idade, telefone }),
+                body: JSON.stringify({ nome, idade, numero }),
             });
             if (!response.ok)
                 throw new Error("Erro ao cadastrar paciente");
