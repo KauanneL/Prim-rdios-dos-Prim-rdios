@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 document.addEventListener("DOMContentLoaded", () => {
+    configurarFormularios();
     carregarPacientes();
     carregarMedicos();
     carregarSalas();
-    configurarFormularios();
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {

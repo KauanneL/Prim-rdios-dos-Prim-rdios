@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 document.addEventListener("DOMContentLoaded", () => {
+    configurarFormularios();
     carregarPacientes();
     carregarMedicos();
     carregarSalas();
-    configurarFormularios();
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -81,12 +81,12 @@ function configurarFormularios() {
         event.preventDefault();
         const nome = document.getElementById("pacienteNome").value;
         const idade = document.getElementById("pacienteIdade").value;
-        const numero = document.getElementById("pacienteTelefone").value;
+        const telefone = document.getElementById("pacienteTelefone").value;
         try {
             const response = yield fetch("http://localhost:3000/api/paciente", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, idade, numero }),
+                body: JSON.stringify({ nome, idade, telefone }),
             });
             if (!response.ok)
                 throw new Error("Erro ao cadastrar paciente");
@@ -142,3 +142,5 @@ function configurarFormularios() {
         }
     }));
 }
+
+
