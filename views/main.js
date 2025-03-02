@@ -47,7 +47,7 @@ function carregarMedicos() {
             const selectMedico = document.getElementById("consultaMedico");
             selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
             medicos.forEach((medico) => {
-                const option = new Option(medico.nome, medico.id);
+                const option = new Option(medico.id, medico.nome, medico.especialidade);
                 selectMedico.add(option);
             });
         }
@@ -66,7 +66,7 @@ function carregarSalas() {
             const selectSala = document.getElementById("consultaSala");
             selectSala.innerHTML = "<option value=''>Selecione a Sala</option>";
             salas.forEach((sala) => {
-                const option = new Option(sala.nome, sala.id);
+                const option = new Option(sala.consultorio, sala.id);
                 selectSala.add(option);
             });
         }
@@ -81,11 +81,11 @@ function configurarFormularios() {
         event.preventDefault();
         const nome = document.getElementById("pacienteNome").value;
         const idade = document.getElementById("pacienteIdade").value;
-        const telefone = document.getElementById("pacienteTelefone").value;
+        const numero = document.getElementById("pacienteTelefone").value;
         yield fetch("http://localhost:3000/api/paciente", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nome, idade, telefone })
+            body: JSON.stringify({ nome, idade, numero })
         });
         pacienteForm.reset();
         yield carregarPacientes();
@@ -108,12 +108,12 @@ function configurarFormularios() {
     const prontuarioForm = document.getElementById("prontuarioForm");
     prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        const pacienteId = document.getElementById("prontuarioPaciente").value;
-        const texto = document.getElementById("prontuarioTexto").value;
+        const paciente_Id = document.getElementById("prontuarioPaciente").value;
+        const histórico = document.getElementById("prontuarioTexto").value;
         yield fetch("http://localhost:3000/api/prontuarios", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ pacienteId, texto })
+            body: JSON.stringify({ paciente_Id, histórico })
         });
         prontuarioForm.reset();
     }));
