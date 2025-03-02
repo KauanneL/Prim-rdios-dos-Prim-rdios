@@ -26,8 +26,8 @@ function carregarPacientes() {
             selectPaciente.innerHTML = "<option value=''>Selecione o Paciente</option>";
             selectProntuario.innerHTML = "<option value=''>Selecione o Paciente</option>";
             pacientes.forEach((paciente) => {
-                const option1 = new Option(paciente.nome, paciente.idade, paciente.numero);
-                const option2 = new Option(paciente.nome, paciente.idade, paciente.numero);
+                const option1 = new Option(paciente.nome, paciente.id);
+                const option2 = new Option(paciente.nome, paciente.id);
                 selectPaciente.add(option1);
                 selectProntuario.add(option2);
             });
@@ -47,7 +47,7 @@ function carregarMedicos() {
             const selectMedico = document.getElementById("consultaMedico");
             selectMedico.innerHTML = "<option value=''>Selecione o Médico</option>";
             medicos.forEach((medico) => {
-                const option = new Option(medico.nome, medico.especialidade);
+                const option = new Option(medico.nome, medico.id);
                 selectMedico.add(option);
             });
         }
@@ -81,14 +81,22 @@ function configurarFormularios() {
         event.preventDefault();
         const nome = document.getElementById("pacienteNome").value;
         const idade = document.getElementById("pacienteIdade").value;
-        const numero = document.getElementById("pacienteTelefone").value;
-        yield fetch("http://localhost:3000/api/paciente", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nome, idade, numero })
-        });
-        pacienteForm.reset();
-        yield carregarPacientes();
+        const telefone = document.getElementById("pacienteTelefone").value;
+        try {
+            const response = yield fetch("http://localhost:3000/api/paciente", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, idade, telefone }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar paciente");
+            pacienteForm.reset();
+            yield carregarPacientes();
+            console.log("Paciente cadastrado com sucesso!");
+        }
+        catch (error) {
+            console.error("Erro ao cadastrar paciente:", error);
+        }
     }));
     const consultaForm = document.getElementById("consultaForm");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
@@ -98,23 +106,39 @@ function configurarFormularios() {
         const sala_Id = document.getElementById("consultaSala").value;
         const data = document.getElementById("consultaData").value;
         const horario = document.getElementById("consultaHorario").value;
-        yield fetch("http://localhost:3000/api/consultas", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ paciente_Id, medico_Id, sala_Id, data, horario })
-        });
-        consultaForm.reset();
+        try {
+            const response = yield fetch("http://localhost:3000/api/consultas", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ paciente_Id, medico_Id, sala_Id, data, horario }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar consulta");
+            consultaForm.reset();
+            console.log("Consulta agendada com sucesso!");
+        }
+        catch (error) {
+            console.error("Erro ao agendar consulta:", error);
+        }
     }));
     const prontuarioForm = document.getElementById("prontuarioForm");
     prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
         const paciente_Id = document.getElementById("prontuarioPaciente").value;
-        const histórico = document.getElementById("prontuarioTexto").value;
-        yield fetch("http://localhost:3000/api/prontuarios", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ paciente_Id, histórico })
-        });
-        prontuarioForm.reset();
+        const historico = document.getElementById("prontuarioTexto").value;
+        try {
+            const response = yield fetch("http://localhost:3000/api/prontuarios", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ paciente_Id, historico }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar prontuário");
+            prontuarioForm.reset();
+            console.log("Prontuário registrado com sucesso!");
+        }
+        catch (error) {
+            console.error("Erro ao cadastrar prontuário:", error);
+        }
     }));
 }
