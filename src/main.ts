@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  configurarFormularios();
   carregarPacientes();
   carregarMedicos();
   carregarSalas();
-  configurarFormularios();
 });
 
 async function carregarPacientes() {
