@@ -29,13 +29,13 @@ export function getProntuario() {
         }
     });
 }
-export function criarProntuario(paciente_id, historico) {
+export function criarProntuario(paciente_id, histórico) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!paciente_id || !historico) {
+        if (!paciente_id || !histórico) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO prontuario (paciente_id, historico) VALUES (?, ?)', [paciente_id, historico]);
+            const [result] = yield pool.execute('INSERT INTO prontuarios (paciente_id, histórico) VALUES (?, ?)', [paciente_id, histórico]);
             return { insertId: result.insertId };
         }
         catch (error) {
