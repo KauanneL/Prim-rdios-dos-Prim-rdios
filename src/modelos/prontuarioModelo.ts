@@ -24,16 +24,16 @@ export async function getProntuario() {
 }
 
 export async function criarProntuario(
-  paciente_id: number, 
+  paciente_nome: string, 
   histórico: string,
 ) {
-  if (!paciente_id || !histórico) {
+  if (!paciente_nome || !histórico) {
     throw new Error('Campos obrigatórios não preenchidos');
   }
   try {
     const [result] = await pool.execute(
-      'INSERT INTO prontuarios (paciente_id, histórico) VALUES (?, ?)',
-      [paciente_id, histórico]
+      'INSERT INTO prontuarios (paciente_nome, histórico) VALUES (?, ?)',
+      [paciente_nome, histórico]
     );
     return { insertId: (result as ResultSetHeader).insertId };
   } catch (error) {
