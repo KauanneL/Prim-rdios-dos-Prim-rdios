@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarPacientes();
     carregarMedicos();
     carregarSalas();
+    carregarConsultasAgendadas();
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -142,5 +143,29 @@ function configurarFormularios() {
         }
     }));
 }
+async function carregarConsultasAgendadas() {
+    try {
+        const response = await fetch("http://localhost:3000/api/consultas");
+        if (!response.ok) throw new Error("Erro ao carregar consultas agendadas");
+        const consultas = await response.json();
 
+        const consultasList = document.getElementById("consultasAgendadasList");
+        consultasList.innerHTML = "";
+
+        consultas.forEach((consulta, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${consulta.paciente_id}</td>
+                <td>${consulta.medico_id}</td>
+                <td>${consulta.data || "N/A"}</td>
+                <td>${consulta.horario}</td>
+                <td>${consulta.sala_id}</td>
+            `;
+            consultasList.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Erro ao carregar consultas:", error);
+    }
+}
 
