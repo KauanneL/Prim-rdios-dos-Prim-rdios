@@ -22,13 +22,13 @@ export function getProntuario(req, res) {
 }
 export function criarProntuario(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { paciente_nome, histórico } = req.body;
+        const { paciente, histórico } = req.body;
         // Verifica se todos os campos obrigatórios estão presentes
-        if (!paciente_nome || !histórico) {
+        if (!paciente || !histórico) {
             return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
         }
         try {
-            const result = yield ProntuarioModel.criarProntuario(paciente_nome, histórico);
+            const result = yield ProntuarioModel.criarProntuario(paciente, histórico);
             return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
         }
         catch (error) {

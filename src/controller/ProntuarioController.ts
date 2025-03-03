@@ -12,15 +12,15 @@ export async function getProntuario(req: Request, res: Response) {
     }
   }
   export async function criarProntuario(req: Request, res: Response): Promise<any> {
-    const { paciente_nome, histórico } = req.body;
+    const { paciente, histórico } = req.body;
   
     // Verifica se todos os campos obrigatórios estão presentes
-    if (!paciente_nome || !histórico) {
+    if (!paciente || !histórico) {
       return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
     }
   
     try {
-      const result = await ProntuarioModel.criarProntuario(paciente_nome, histórico);
+      const result = await ProntuarioModel.criarProntuario(paciente, histórico);
       return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
     } catch (error) {
       return res.status(500).json({ message: 'Erro ao criar prontuário' }); // 'return' aqui também

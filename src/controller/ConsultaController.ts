@@ -11,15 +11,15 @@ export async function getConsulta(req: Request, res: Response) {
     }
   }
   export async function criarConsulta(req: Request, res: Response): Promise<any> {
-    const { paciente_nome, medico_nome, sala_consultorio, data, horario } = req.body;
+    const { paciente, medico, sala, data, horario } = req.body;
   
     // Verifica se todos os campos obrigatórios estão presentes
-    if (!paciente_nome || !medico_nome || !sala_consultorio || !data || !horario) {
+    if (!paciente || !medico || !sala || !data || !horario) {
       return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
     }
   
     try {
-      const result = await ConsultaModel.criarConsulta(paciente_nome, medico_nome, sala_consultorio, data, horario);
+      const result = await ConsultaModel.criarConsulta(paciente, medico, sala, data, horario);
       return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
     } catch (error) {
       return res.status(500).json({ message: 'Erro ao criar consulta' }); // 'return' aqui também
