@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarSalas();
     carregarConsultasAgendadas();
     carregarPacientesProntuarios();
+    carregarOcupacaoSalas();
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -125,6 +126,7 @@ function configurarFormularios() {
             consultaForm.reset();
             console.log("Consulta agendada com sucesso!");
             carregarConsultasAgendadas();
+            carregarOcupacaoSalas();
         }
         catch (error) {
             console.error("Erro ao agendar consulta:", error);
@@ -198,5 +200,40 @@ async function carregarPacientesProntuarios() {
 
     } catch (error) {
         console.error("Erro ao carregar prontuários:", error);
+    }
+}
+async function carregarOcupacaoSalas() {
+    try {
+        // Buscar salas
+        const responseSalas = await fetch("http://localhost:3000/api/salas");
+        if (!responseSalas.ok) throw new Error("Erro ao carregar salas");
+
+        const salas = await responseSalas.json();
+
+        // Buscar consultas
+        const responseConsultas = await fetch("http://localhost:3000/api/consultas");
+        if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
+
+        const consultas = await responseConsultas.json();
+
+        const tbody = document.getElementById("salasList");
+        tbody.innerHTML = "";
+
+        salas.forEach((sala) => {
+            const consulta = consultas.find(c => c.sala_id === sala.id);
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${sala.id}</td>
+                <td>${sala.consultorio}</td>
+                <td>${consulta ? consulta.data : "-"}</td>
+                <td>${consulta ? consulta.horario : "-"}</td>
+                <td>${consulta ? "Ocupada" : "Livre"}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar ocupação de salas:", error);
     }
 }
