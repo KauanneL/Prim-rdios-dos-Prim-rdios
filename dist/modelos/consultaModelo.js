@@ -35,7 +35,7 @@ export function criarConsulta(paciente_nome, medico_nome, sala_consultorio, data
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO consultas (paciente, medico, sala, data, horario) VALUES (?, ?, ?, ?, ?)', [paciente_nome, medico_nome, sala_consultorio, data, horario]);
+            const [result] = yield pool.execute('INSERT INTO consultas (paciente_nome, medico_nome, sala_consultorio, data, horario) VALUES (?, ?, ?, ?, ?)', [paciente_nome, medico_nome, sala_consultorio, data, horario]);
             return { insertId: result.insertId };
         }
         catch (error) {
