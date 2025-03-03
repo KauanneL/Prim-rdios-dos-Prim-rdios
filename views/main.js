@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarPacientesProntuarios();
     carregarOcupacaoSalas();
 });
+function formatarData(dataISO) {
+    const data = new Date(dataISO);
+    return data.toLocaleDateString('pt-BR'); // Converte para "dd/mm/yyyy"
+}
+
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -170,7 +175,7 @@ async function carregarConsultasAgendadas() {
                 <td>${index + 1}</td>
                 <td>${consulta.paciente_nome}</td>
                 <td>${consulta.medico_nome}</td>
-                <td>${consulta.data}</td>
+                <td>${formatarData(consulta.data)}</td>
                 <td>${consulta.horario}</td>
                 <td>${consulta.sala_consultorio}</td>
             `;
@@ -227,7 +232,7 @@ async function carregarOcupacaoSalas() {
                 row.innerHTML = `
                     <td>${sala.id}</td>
                     <td>${sala.consultorio}</td>
-                    <td>${consulta.data}</td>
+                    <td>${formatarData(consulta.data)}</td>
                     <td>${consulta.horario}</td>
                     <td>Ocupada</td>
                 `;
