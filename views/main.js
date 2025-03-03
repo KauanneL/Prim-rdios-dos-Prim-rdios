@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarMedicos();
     carregarSalas();
     carregarConsultasAgendadas();
+    carregarPacientesProntuarios();
 });
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -132,7 +133,8 @@ function configurarFormularios() {
     const prontuarioForm = document.getElementById("prontuarioForm");
     prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        const paciente_nome = document.getElementById("prontuarioPaciente").value;
+        const selectPaciente = document.getElementById("prontuarioPaciente");
+        const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
         const histórico = document.getElementById("prontuarioTexto").value;
         try {
             const response = yield fetch("http://localhost:3000/api/prontuarios", {
@@ -144,6 +146,7 @@ function configurarFormularios() {
                 throw new Error("Erro ao cadastrar prontuário");
             prontuarioForm.reset();
             console.log("Prontuário registrado com sucesso!");
+            carregarPacientesProntuarios();
         }
         catch (error) {
             console.error("Erro ao cadastrar prontuário:", error);
@@ -175,4 +178,25 @@ async function carregarConsultasAgendadas() {
         console.error("Erro ao carregar consultas:", error);
     }
 }
+async function carregarPacientesProntuarios() {
+    try {
+        const response = await fetch("http://localhost:3000/api/prontuarios");
+        if (!response.ok) throw new Error("Erro ao carregar prontuários");
 
+        const prontuarios = await response.json();
+        const tbody = document.getElementById("pacientesProntuariosList");
+        tbody.innerHTML = "";
+
+        prontuarios.forEach((prontuario) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${prontuario.paciente_nome}</td>
+                <td>${prontuario.histórico}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar prontuários:", error);
+    }
+}
