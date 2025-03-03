@@ -209,22 +209,27 @@ async function carregarOcupacaoSalas() {
         if (!responseSalas.ok) throw new Error("Erro ao carregar salas");
 
         const salas = await responseSalas.json();
+        console.log("Salas carregadas:", salas);
 
         // Buscar consultas
         const responseConsultas = await fetch("http://localhost:3000/api/consultas");
         if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
 
         const consultas = await responseConsultas.json();
+        console.log("Consultas carregadas:", consultas);
 
         const tbody = document.getElementById("salasList");
         tbody.innerHTML = "";
 
         salas.forEach((sala) => {
-            // Verificar se existe alguma consulta associada a esta sala
-            const consulta = consultas.find(c => c.sala_id === sala.id);
+            // Suporte para diferentes nomes de chave (caso necessário)
+            const consulta = consultas.find(c => {
+                return c.sala_id === sala.id || c.salaId === sala.id;
+            });
 
-            // Se tiver consulta, exibe a sala (ou seja, só exibe salas ocupadas)
             if (consulta) {
+                console.log(`Sala ${sala.id} ocupada por consulta:`, consulta);
+
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${sala.id}</td>
@@ -241,3 +246,4 @@ async function carregarOcupacaoSalas() {
         console.error("Erro ao carregar ocupação de salas:", error);
     }
 }
+
