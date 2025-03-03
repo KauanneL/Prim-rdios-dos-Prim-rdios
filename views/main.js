@@ -123,6 +123,7 @@ function configurarFormularios() {
                 throw new Error("Erro ao cadastrar consulta");
             consultaForm.reset();
             console.log("Consulta agendada com sucesso!");
+            carregarConsultasAgendadas();
         }
         catch (error) {
             console.error("Erro ao agendar consulta:", error);
