@@ -102,9 +102,15 @@ function configurarFormularios() {
     const consultaForm = document.getElementById("consultaForm");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        const paciente_nome = document.getElementById("consultaPaciente").value;
-        const medico_nome = document.getElementById("consultaMedico").value;
-        const sala_consultorio = document.getElementById("consultaSala").value;
+        const selectPaciente = document.getElementById("consultaPaciente");
+        const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
+        
+        const selectMedico = document.getElementById("consultaMedico");
+        const medico_nome = selectMedico.options[selectMedico.selectedIndex].text;
+        
+        const selectSala = document.getElementById("consultaSala");
+        const sala_consultorio = selectSala.options[selectSala.selectedIndex].text;
+        
         const data = document.getElementById("consultaData").value;
         const horario = document.getElementById("consultaHorario").value;
         try {
