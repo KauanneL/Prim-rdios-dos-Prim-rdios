@@ -35,7 +35,7 @@ export function criarProntuario(paciente_nome, histórico) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
-            const [result] = yield pool.execute('INSERT INTO prontuarios (paciente, histórico) VALUES (?, ?)', [paciente_nome, histórico]);
+            const [result] = yield pool.execute('INSERT INTO prontuarios (paciente_nome, histórico) VALUES (?, ?)', [paciente_nome, histórico]);
             return { insertId: result.insertId };
         }
         catch (error) {

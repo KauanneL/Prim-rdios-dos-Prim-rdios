@@ -32,7 +32,7 @@ export async function criarProntuario(
   }
   try {
     const [result] = await pool.execute(
-      'INSERT INTO prontuarios (paciente, histórico) VALUES (?, ?)',
+      'INSERT INTO prontuarios (paciente_nome, histórico) VALUES (?, ?)',
       [paciente_nome, histórico]
     );
     return { insertId: (result as ResultSetHeader).insertId };
