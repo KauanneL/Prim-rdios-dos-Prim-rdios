@@ -221,7 +221,7 @@ async function carregarOcupacaoSalas() {
 
         salas.forEach((sala) => {
             // Verificar se existe alguma consulta associada a esta sala
-            const consulta = consultas.find(c => c.sala_consultorio === sala.consultorio);
+            const consulta = consultas.filter(c => c.sala_consultorio === sala.consultorio);
 
             // Se tiver consulta, exibe a sala (ou seja, só exibe salas ocupadas)
             if (consulta) {
