@@ -109,34 +109,30 @@ function carregarSalas() {
 }
 function configurarFormularios() {
     const pacienteForm = document.getElementById("pacienteForm");
-    pacienteForm.addEventListener("submit", function(event) {
+    pacienteForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        
         const nome = document.getElementById("pacienteNome").value;
         const idade = document.getElementById("pacienteIdade").value;
         const telefone = document.getElementById("pacienteTelefone").value;
-        
-        fetch("http://localhost:3000/api/paciente", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nome, idade, telefone })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error("Erro ao cadastrar paciente");
-            return response.json();
-        })
-        .then(() => {
+        try {
+            const response = yield fetch("http://localhost:3000/api/paciente", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, idade, telefone }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar paciente");
             pacienteForm.reset();
-            carregarPacientes();
+            yield carregarPacientes();
             console.log("Paciente cadastrado com sucesso!");
-        })
-        .catch(error => console.error("Erro ao cadastrar paciente:", error));
-    });
-
+        }
+        catch (error) {
+            console.error("Erro ao cadastrar paciente:", error);
+        }
+    }));
     const consultaForm = document.getElementById("consultaForm");
-    consultaForm.addEventListener("submit", function(event) {
+    consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-
         const selectPaciente = document.getElementById("consultaPaciente");
         const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
         
@@ -148,61 +144,45 @@ function configurarFormularios() {
         
         const data = document.getElementById("consultaData").value;
         const horario = document.getElementById("consultaHorario").value;
-        
-        if (!validarDataFutura(data)) {
-            alert("A data da consulta não pode ser anterior à data atual.");
-            return;
-        }
-        
-        verificarDisponibilidadeConsulta(paciente_nome, medico_nome, sala_consultorio, data, horario, function(disponivel) {
-            if (!disponivel) {
-                alert("Já existe uma consulta agendada para este paciente, médico, sala, data e horário.");
-                return;
-            }
-            
-            fetch("http://localhost:3000/api/consultas", {
+        try {
+            const response = yield fetch("http://localhost:3000/api/consultas", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ paciente_nome, medico_nome, sala_consultorio, data, horario })
-            })
-            .then(response => {
-                if (!response.ok) throw new Error("Erro ao cadastrar consulta");
-                return response.json();
-            })
-            .then(() => {
-                consultaForm.reset();
-                console.log("Consulta agendada com sucesso!");
-                carregarConsultasAgendadas();
-                carregarOcupacaoSalas();
-            })
-            .catch(error => console.error("Erro ao agendar consulta:", error));
-        });
-    });
-
+                body: JSON.stringify({ paciente_nome, medico_nome, sala_consultorio, data, horario }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar consulta");
+            consultaForm.reset();
+            console.log("Consulta agendada com sucesso!");
+            carregarConsultasAgendadas();
+            carregarOcupacaoSalas();
+        }
+        catch (error) {
+            console.error("Erro ao agendar consulta:", error);
+        }
+    }));
     const prontuarioForm = document.getElementById("prontuarioForm");
-    prontuarioForm.addEventListener("submit", function(event) {
+    prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        
         const selectPaciente = document.getElementById("prontuarioPaciente");
         const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
-        const historico = document.getElementById("prontuarioTexto").value;
-        
-        fetch("http://localhost:3000/api/prontuarios", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ paciente_nome, historico })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error("Erro ao cadastrar prontuário");
-            return response.json();
-        })
-        .then(() => {
+        const histórico = document.getElementById("prontuarioTexto").value;
+        try {
+            const response = yield fetch("http://localhost:3000/api/prontuarios", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ paciente_nome, histórico }),
+            });
+            if (!response.ok)
+                throw new Error("Erro ao cadastrar prontuário");
             prontuarioForm.reset();
             console.log("Prontuário registrado com sucesso!");
             carregarPacientesProntuarios();
-        })
-        .catch(error => console.error("Erro ao cadastrar prontuário:", error));
-    });
+        }
+        catch (error) {
+            console.error("Erro ao cadastrar prontuário:", error);
+        }
+    }));
 }
 async function carregarConsultasAgendadas() {
     try {
