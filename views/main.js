@@ -21,31 +21,6 @@ function formatarData(dataISO) {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR'); // Converte para "dd/mm/yyyy"
 }
-function validarDataFutura(data) {
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    const dataConsulta = new Date(data);
-    return dataConsulta >= hoje;
-}
-
-async function verificarDisponibilidadeConsulta(paciente_nome, medico_nome, sala_consultorio, data, horario) {
-    try {
-        const response = await fetch("http://localhost:3000/api/consultas");
-        if (!response.ok) throw new Error("Erro ao carregar consultas agendadas");
-        
-        const consultas = await response.json();
-        return !consultas.some(consulta =>
-            consulta.paciente_nome === paciente_nome &&
-            consulta.medico_nome === medico_nome &&
-            consulta.sala_consultorio === sala_consultorio &&
-            consulta.data === data &&
-            consulta.horario === horario
-        );
-    } catch (error) {
-        console.error("Erro ao verificar disponibilidade da consulta:", error);
-        return false;
-    }
-}
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
