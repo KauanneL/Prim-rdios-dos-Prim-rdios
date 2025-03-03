@@ -233,7 +233,7 @@ async function carregarOcupacaoSalas() {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${sala.id}</td>
-                    <td>${sala.consultorio}</td>
+                    <td>${sala.sala_consultorio}</td>
                     <td>${consulta.data}</td>
                     <td>${consulta.horario}</td>
                     <td>Ocupada</td>
