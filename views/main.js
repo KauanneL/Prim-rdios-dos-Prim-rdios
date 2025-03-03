@@ -158,7 +158,7 @@ async function carregarConsultasAgendadas() {
                 <td>${index + 1}</td>
                 <td>${consulta.paciente}</td>
                 <td>${consulta.medico}</td>
-                <td>${consulta.data} || "N/T"</td>
+                <td>${consulta.data}</td>
                 <td>${consulta.horario}</td>
                 <td>${consulta.sala}</td>
             `;
