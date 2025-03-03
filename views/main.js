@@ -220,17 +220,21 @@ async function carregarOcupacaoSalas() {
         tbody.innerHTML = "";
 
         salas.forEach((sala) => {
+            // Verificar se existe alguma consulta associada a esta sala
             const consulta = consultas.find(c => c.sala_id === sala.id);
 
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${sala.id}</td>
-                <td>${sala.consultorio}</td>
-                <td>${consulta ? consulta.data : "-"}</td>
-                <td>${consulta ? consulta.horario : "-"}</td>
-                <td>${consulta ? "Ocupada" : "Livre"}</td>
-            `;
-            tbody.appendChild(row);
+            // Se tiver consulta, exibe a sala (ou seja, só exibe salas ocupadas)
+            if (consulta) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${sala.id}</td>
+                    <td>${sala.consultorio}</td>
+                    <td>${consulta.data}</td>
+                    <td>${consulta.horario}</td>
+                    <td>Ocupada</td>
+                `;
+                tbody.appendChild(row);
+            }
         });
 
     } catch (error) {
