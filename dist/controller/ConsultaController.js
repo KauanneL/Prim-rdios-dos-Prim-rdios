@@ -22,13 +22,13 @@ export function getConsulta(req, res) {
 }
 export function criarConsulta(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { paciente, medico, sala, data, horario } = req.body;
+        const { paciente_nome, medico_nome, sala_consultorio, data, horario } = req.body;
         // Verifica se todos os campos obrigatórios estão presentes
-        if (!paciente || !medico || !sala || !data || !horario) {
+        if (!paciente_nome || !medico_nome || !sala_consultorio || !data || !horario) {
             return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
         }
         try {
-            const result = yield ConsultaModel.criarConsulta(paciente, medico, sala, data, horario);
+            const result = yield ConsultaModel.criarConsulta(paciente_nome, medico_nome, sala_consultorio, data, horario);
             return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
         }
         catch (error) {

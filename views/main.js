@@ -102,16 +102,16 @@ function configurarFormularios() {
     const consultaForm = document.getElementById("consultaForm");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        const paciente = document.getElementById("consultaPaciente").value;
-        const medico = document.getElementById("consultaMedico").value;
-        const sala = document.getElementById("consultaSala").value;
+        const paciente_nome = document.getElementById("consultaPaciente").value;
+        const medico_nome = document.getElementById("consultaMedico").value;
+        const sala_consultorio = document.getElementById("consultaSala").value;
         const data = document.getElementById("consultaData").value;
         const horario = document.getElementById("consultaHorario").value;
         try {
             const response = yield fetch("http://localhost:3000/api/consultas", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ paciente, medico, sala, data, horario }),
+                body: JSON.stringify({ paciente_nome, medico_nome, sala_consultorio, data, horario }),
             });
             if (!response.ok)
                 throw new Error("Erro ao cadastrar consulta");
@@ -156,11 +156,11 @@ async function carregarConsultasAgendadas() {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${index + 1}</td>
-                <td>${consulta.paciente}</td>
-                <td>${consulta.medico}</td>
+                <td>${consulta.paciente_nome}</td>
+                <td>${consulta.medico_nome}</td>
                 <td>${consulta.data}</td>
                 <td>${consulta.horario}</td>
-                <td>${consulta.sala}</td>
+                <td>${consulta.sala_consultorio}</td>
             `;
             consultasList.appendChild(row);
         });
