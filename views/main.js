@@ -222,18 +222,18 @@ async function carregarOcupacaoSalas() {
         tbody.innerHTML = "";
 
         salas.forEach((sala) => {
-            // Suporte para diferentes nomes de chave (caso necessário)
-            const consulta = consultas.find(c => {
-                return c.sala_id === sala.id || c.salaId === sala.id;
-            });
+            const consulta = consultas.find(c => 
+                String(c.sala_id) === String(sala.id) || 
+                String(c.salaId) === String(sala.id)
+            );
 
             if (consulta) {
-                console.log(`Sala ${sala.id} ocupada por consulta:`, consulta);
+                console.log(`Sala ${sala.id} está ocupada com consulta:`, consulta);
 
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${sala.id}</td>
-                    <td>${sala.sala_consultorio}</td>
+                    <td>${sala.consultorio}</td>
                     <td>${consulta.data}</td>
                     <td>${consulta.horario}</td>
                     <td>Ocupada</td>
@@ -246,4 +246,5 @@ async function carregarOcupacaoSalas() {
         console.error("Erro ao carregar ocupação de salas:", error);
     }
 }
+
 
