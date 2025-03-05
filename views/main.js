@@ -106,36 +106,63 @@ function configurarFormularios() {
         }
     }));
     const consultaForm = document.getElementById("consultaForm");
-    consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
-        event.preventDefault();
-        const selectPaciente = document.getElementById("consultaPaciente");
-        const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
-        
-        const selectMedico = document.getElementById("consultaMedico");
-        const medico_nome = selectMedico.options[selectMedico.selectedIndex].text;
-        
-        const selectSala = document.getElementById("consultaSala");
-        const sala_consultorio = selectSala.options[selectSala.selectedIndex].text;
-        
-        const data = document.getElementById("consultaData").value;
-        const horario = document.getElementById("consultaHorario").value;
-        try {
-            const response = yield fetch("http://localhost:3000/api/consultas", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ paciente_nome, medico_nome, sala_consultorio, data, horario }),
-            });
-            if (!response.ok)
-                throw new Error("Erro ao cadastrar consulta");
-            consultaForm.reset();
-            console.log("Consulta agendada com sucesso!");
-            carregarConsultasAgendadas();
-            carregarOcupacaoSalas();
+consultaForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const selectPaciente = document.getElementById("consultaPaciente");
+    const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
+
+    const selectMedico = document.getElementById("consultaMedico");
+    const medico_nome = selectMedico.options[selectMedico.selectedIndex].text;
+
+    const selectSala = document.getElementById("consultaSala");
+    const sala_consultorio = selectSala.options[selectSala.selectedIndex].text;
+
+    const data = document.getElementById("consultaData").value;
+    const horario = document.getElementById("consultaHorario").value;
+
+    // Validação: A data não pode ser anterior à data atual
+    const hoje = new Date().toISOString().split("T")[0];
+    if (data < hoje) {
+        alert("A data da consulta não pode ser anterior à data atual.");
+        return;
+    }
+
+    try {
+        // Verificar conflitos de agendamento
+        const responseConsultas = await fetch("http://localhost:3000/api/consultas");
+        if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
+        const consultas = await responseConsultas.json();
+
+        const conflito = consultas.some(
+            (consulta) => consulta.sala_consultorio === sala_consultorio && 
+                          consulta.data === data && 
+                          consulta.horario === horario
+        );
+
+        if (conflito) {
+            alert("Já existe uma consulta agendada para essa sala nesse horário.");
+            return;
         }
-        catch (error) {
-            console.error("Erro ao agendar consulta:", error);
-        }
-    }));
+
+        // Agendar consulta se não houver conflitos
+        const response = await fetch("http://localhost:3000/api/consultas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paciente_nome, medico_nome, sala_consultorio, data, horario }),
+        });
+
+        if (!response.ok) throw new Error("Erro ao cadastrar consulta");
+
+        consultaForm.reset();
+        console.log("Consulta agendada com sucesso!");
+        carregarConsultasAgendadas();
+        carregarOcupacaoSalas();
+    } catch (error) {
+        console.error("Erro ao agendar consulta:", error);
+    }
+});
+
     const prontuarioForm = document.getElementById("prontuarioForm");
     prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
