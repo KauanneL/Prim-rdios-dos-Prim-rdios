@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 function formatarData(dataISO) {
     const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR'); // Converte para "dd/mm/yyyy"
+    return data.toLocaleDateString('pt-BR'); 
 }
 function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -121,7 +121,6 @@ consultaForm.addEventListener("submit", async (event) => {
     const data = document.getElementById("consultaData").value;
     const horario = document.getElementById("consultaHorario").value;
 
-    // Validação: A data não pode ser anterior à data atual
     const hoje = new Date().toISOString().split("T")[0];
     if (data < hoje) {
         alert("A data da consulta não pode ser anterior à data atual.");
@@ -129,7 +128,6 @@ consultaForm.addEventListener("submit", async (event) => {
     }
 
     try {
-        // Verificar conflitos de agendamento
         const responseConsultas = await fetch("http://localhost:3000/api/consultas");
         if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
         const consultas = await responseConsultas.json();
@@ -144,8 +142,6 @@ consultaForm.addEventListener("submit", async (event) => {
             alert("Já existe uma consulta agendada para essa sala nesse horário.");
             return;
         }
-
-        // Agendar consulta se não houver conflitos
         const response = await fetch("http://localhost:3000/api/consultas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -220,7 +216,6 @@ async function carregarPacientesProntuarios() {
         const tbody = document.getElementById("pacientesProntuariosList");
         tbody.innerHTML = "";
 
-        // Criar um objeto para agrupar prontuários por paciente
         const prontuariosAgrupados = {};
         
         prontuarios.forEach((prontuario) => {
@@ -230,7 +225,6 @@ async function carregarPacientesProntuarios() {
             prontuariosAgrupados[prontuario.paciente_nome].push(prontuario.histórico);
         });
 
-        // Adicionar os prontuários agrupados na tabela
         Object.keys(prontuariosAgrupados).forEach((paciente_nome) => {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -251,12 +245,10 @@ async function carregarPacientesProntuarios() {
 
 async function carregarOcupacaoSalas() {
     try {
-        // Buscar salas
         const responseSalas = await fetch("http://localhost:3000/api/salas");
         if (!responseSalas.ok) throw new Error("Erro ao carregar salas");
         const salas = await responseSalas.json();
 
-        // Buscar consultas
         const responseConsultas = await fetch("http://localhost:3000/api/consultas");
         if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
         const consultas = await responseConsultas.json();
@@ -265,10 +257,7 @@ async function carregarOcupacaoSalas() {
         tbody.innerHTML = "";
 
         salas.forEach((sala) => {
-            // Buscar todas as consultas associadas à sala
             const consultasSala = consultas.filter(c => c.sala_consultorio === sala.consultorio);
-
-            // Se houver consultas, exibe todas
             consultasSala.forEach((consulta) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
