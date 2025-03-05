@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarMedicos();
     carregarSalas();
     carregarConsultasAgendadas();
-    carregarPacientesProntuarios();
     carregarOcupacaoSalas();
+    carregarPacientesProntuarios();
 });
 function formatarData(dataISO) {
     const data = new Date(dataISO);
