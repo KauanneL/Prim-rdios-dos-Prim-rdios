@@ -220,11 +220,26 @@ async function carregarPacientesProntuarios() {
         const tbody = document.getElementById("pacientesProntuariosList");
         tbody.innerHTML = "";
 
+        // Criar um objeto para agrupar prontuários por paciente
+        const prontuariosAgrupados = {};
+        
         prontuarios.forEach((prontuario) => {
+            if (!prontuariosAgrupados[prontuario.paciente_nome]) {
+                prontuariosAgrupados[prontuario.paciente_nome] = [];
+            }
+            prontuariosAgrupados[prontuario.paciente_nome].push(prontuario.histórico);
+        });
+
+        // Adicionar os prontuários agrupados na tabela
+        Object.keys(prontuariosAgrupados).forEach((paciente_nome) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${prontuario.paciente_nome}</td>
-                <td>${prontuario.histórico}</td>
+                <td>${paciente_nome}</td>
+                <td>
+                    <ul>
+                        ${prontuariosAgrupados[paciente_nome].map(hist => `<li>${hist}</li>`).join('')}
+                    </ul>
+                </td>
             `;
             tbody.appendChild(row);
         });
@@ -233,6 +248,7 @@ async function carregarPacientesProntuarios() {
         console.error("Erro ao carregar prontuários:", error);
     }
 }
+
 async function carregarOcupacaoSalas() {
     try {
         // Buscar salas
