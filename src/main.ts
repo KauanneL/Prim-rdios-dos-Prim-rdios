@@ -80,24 +80,22 @@ async function carregarSalas(): Promise<void> {
 }
 function configurarFormularios(): void {
     const pacienteForm = document.getElementById("pacienteForm") as HTMLFormElement;
-    if (!pacienteForm) throw new Error("Formulário de paciente não encontrado.");
-
     pacienteForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-
+        
         const nome = (document.getElementById("pacienteNome") as HTMLInputElement).value;
         const idade = (document.getElementById("pacienteIdade") as HTMLInputElement).value;
         const telefone = (document.getElementById("pacienteTelefone") as HTMLInputElement).value;
-
+        
         try {
             const response = await fetch("http://localhost:3000/api/paciente", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ nome, idade, telefone }),
             });
-
+            
             if (!response.ok) throw new Error("Erro ao cadastrar paciente");
-
+            
             pacienteForm.reset();
             await carregarPacientes();
             console.log("Paciente cadastrado com sucesso!");
@@ -107,8 +105,6 @@ function configurarFormularios(): void {
     });
 
     const consultaForm = document.getElementById("consultaForm") as HTMLFormElement;
-    if (!consultaForm) throw new Error("Formulário de consulta não encontrado.");
-
     consultaForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -133,20 +129,19 @@ function configurarFormularios(): void {
         try {
             const responseConsultas = await fetch("http://localhost:3000/api/consultas");
             if (!responseConsultas.ok) throw new Error("Erro ao carregar consultas");
-
             const consultas: { sala_consultorio: string; data: string; horario: string }[] = await responseConsultas.json();
 
             const conflito = consultas.some(
-                (consulta) => consulta.sala_consultorio === sala_consultorio &&
-                    consulta.data === data &&
-                    consulta.horario === horario
+                (consulta) => consulta.sala_consultorio === sala_consultorio && 
+                              consulta.data === data && 
+                              consulta.horario === horario
             );
 
             if (conflito) {
                 alert("Já existe uma consulta agendada para essa sala nesse horário.");
                 return;
             }
-
+            
             const response = await fetch("http://localhost:3000/api/consultas", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -165,24 +160,23 @@ function configurarFormularios(): void {
     });
 
     const prontuarioForm = document.getElementById("prontuarioForm") as HTMLFormElement;
-    if (!prontuarioForm) throw new Error("Formulário de prontuário não encontrado.");
-
     prontuarioForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-
+        
         const selectPaciente = document.getElementById("prontuarioPaciente") as HTMLSelectElement;
         const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
+        
         const historico = (document.getElementById("prontuarioTexto") as HTMLTextAreaElement).value;
-
+        
         try {
             const response = await fetch("http://localhost:3000/api/prontuarios", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ paciente_nome, historico }),
             });
-
+            
             if (!response.ok) throw new Error("Erro ao cadastrar prontuário");
-
+            
             prontuarioForm.reset();
             console.log("Prontuário registrado com sucesso!");
             carregarPacientesProntuarios();
