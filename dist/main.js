@@ -161,12 +161,12 @@ function configurarFormularios() {
         event.preventDefault();
         const selectPaciente = document.getElementById("prontuarioPaciente");
         const paciente_nome = selectPaciente.options[selectPaciente.selectedIndex].text;
-        const historico = document.getElementById("prontuarioTexto").value;
+        const histórico = document.getElementById("prontuarioTexto").value;
         try {
             const response = yield fetch("http://localhost:3000/api/prontuarios", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ paciente_nome, historico }),
+                body: JSON.stringify({ paciente_nome, histórico }),
             });
             if (!response.ok)
                 throw new Error("Erro ao cadastrar prontuário");
