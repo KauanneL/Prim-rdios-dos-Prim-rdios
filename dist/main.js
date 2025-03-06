@@ -91,8 +91,6 @@ function carregarSalas() {
 }
 function configurarFormularios() {
     const pacienteForm = document.getElementById("pacienteForm");
-    if (!pacienteForm)
-        throw new Error("Formulário de paciente não encontrado.");
     pacienteForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
         const nome = document.getElementById("pacienteNome").value;
@@ -115,8 +113,6 @@ function configurarFormularios() {
         }
     }));
     const consultaForm = document.getElementById("consultaForm");
-    if (!consultaForm)
-        throw new Error("Formulário de consulta não encontrado.");
     consultaForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
         const selectPaciente = document.getElementById("consultaPaciente");
@@ -161,8 +157,6 @@ function configurarFormularios() {
         }
     }));
     const prontuarioForm = document.getElementById("prontuarioForm");
-    if (!prontuarioForm)
-        throw new Error("Formulário de prontuário não encontrado.");
     prontuarioForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
         const selectPaciente = document.getElementById("prontuarioPaciente");
