@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "start": "tsc && node dist/app.js",
-    "test": "jest"
+    "test": "jsdom"
   },
   "keywords": [],
   "author": "",
