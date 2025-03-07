@@ -11,7 +11,7 @@
     "skipLibCheck": true,            // Ignora verificação de tipos em arquivos de bibliotecas
     "declaration": true,             // Gera arquivos .d.ts de definição de tipos
     "allowJs": true,                 // Permite a compilação de arquivos JavaScript
-    "checkJs": false                 // Desativa a verificação de tipos em arquivos .js
+    "checkJs": false,                // Desativa a verificação de tipos em arquivos .js
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

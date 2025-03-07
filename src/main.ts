@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   carregarOcupacaoSalas();
   carregarPacientesProntuarios();
 });
-function formatarData(dataISO: string): string {
+export function formatarData(dataISO: string): string {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR'); 
 }
-async function carregarPacientes(): Promise<void> {
+export async function carregarPacientes(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/paciente");
         if (!response.ok) throw new Error("Erro ao carregar pacientes");
@@ -38,7 +38,7 @@ async function carregarPacientes(): Promise<void> {
         console.error("Erro ao carregar pacientes:", error);
     }
 }
-async function carregarMedicos(): Promise<void> {
+export async function carregarMedicos(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/medicos");
         if (!response.ok) throw new Error("Erro ao carregar médicos");
@@ -58,7 +58,7 @@ async function carregarMedicos(): Promise<void> {
         console.error("Erro ao carregar médicos:", error);
     }
 }
-async function carregarSalas(): Promise<void> {
+export async function carregarSalas(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/salas");
         if (!response.ok) throw new Error("Erro ao carregar salas");
@@ -78,7 +78,7 @@ async function carregarSalas(): Promise<void> {
         console.error("Erro ao carregar salas:", error);
     }
 }
-function configurarFormularios(): void {
+export function configurarFormularios(): void {
     const pacienteForm = document.getElementById("pacienteForm") as HTMLFormElement;
     pacienteForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -185,7 +185,7 @@ function configurarFormularios(): void {
         }
     });
 }
-async function carregarConsultasAgendadas(): Promise<void> {
+export async function carregarConsultasAgendadas(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/consultas");
         if (!response.ok) throw new Error("Erro ao carregar consultas agendadas");
@@ -219,7 +219,7 @@ async function carregarConsultasAgendadas(): Promise<void> {
         console.error("Erro ao carregar consultas:", error);
     }
 }
-async function carregarPacientesProntuarios(): Promise<void> {
+export async function carregarPacientesProntuarios(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/prontuarios");
         if (!response.ok) throw new Error("Erro ao carregar prontuários");
@@ -257,7 +257,7 @@ async function carregarPacientesProntuarios(): Promise<void> {
         console.error("Erro ao carregar prontuários:", error);
     }
 }
-async function carregarOcupacaoSalas(): Promise<void> {
+export async function carregarOcupacaoSalas(): Promise<void> {
     try {
         const responseSalas = await fetch("http://localhost:3000/api/salas");
         if (!responseSalas.ok) throw new Error("Erro ao carregar salas");
