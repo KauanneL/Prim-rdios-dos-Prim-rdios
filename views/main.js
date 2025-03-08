@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,11 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarOcupacaoSalas();
     carregarPacientesProntuarios();
 });
-export function formatarData(dataISO) {
+function formatarData(dataISO) {
     const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+    return data.toLocaleDateString('pt-BR');
 }
-export function carregarPacientes() {
+function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("http://localhost:3000/api/paciente");
@@ -46,7 +47,7 @@ export function carregarPacientes() {
         }
     });
 }
-export function carregarMedicos() {
+function carregarMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("http://localhost:3000/api/medicos");
@@ -67,7 +68,7 @@ export function carregarMedicos() {
         }
     });
 }
-export function carregarSalas() {
+function carregarSalas() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("http://localhost:3000/api/salas");
@@ -88,7 +89,7 @@ export function carregarSalas() {
         }
     });
 }
-export function configurarFormularios() {
+function configurarFormularios() {
     const pacienteForm = document.getElementById("pacienteForm");
     pacienteForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -178,7 +179,7 @@ export function configurarFormularios() {
         }
     }));
 }
-export function carregarConsultasAgendadas() {
+function carregarConsultasAgendadas() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("http://localhost:3000/api/consultas");
@@ -207,7 +208,7 @@ export function carregarConsultasAgendadas() {
         }
     });
 }
-export function carregarPacientesProntuarios() {
+function carregarPacientesProntuarios() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("http://localhost:3000/api/prontuarios");
@@ -243,7 +244,7 @@ export function carregarPacientesProntuarios() {
         }
     });
 }
-export function carregarOcupacaoSalas() {
+function carregarOcupacaoSalas() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const responseSalas = yield fetch("http://localhost:3000/api/salas");

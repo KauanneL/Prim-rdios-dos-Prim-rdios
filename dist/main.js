@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 export function formatarData(dataISO) {
     const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+    return data.toLocaleDateString('pt-BR');
 }
 export function carregarPacientes() {
     return __awaiter(this, void 0, void 0, function* () {
