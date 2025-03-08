@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 export function formatarData(dataISO: string): string {
     const data = new Date(dataISO);
-    return data.toLocaleDateString('pt-BR'); 
+    return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' }); 
 }
 export async function carregarPacientes(): Promise<void> {
     try {
