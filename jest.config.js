@@ -4,4 +4,8 @@ export default {
   transform: {
     "^.+\.tsx?$": ["ts-jest",{}],
   },
+  module:exports = {
+    testEnvironment: "jsdom"
+  },
+  
 };
