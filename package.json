@@ -9,6 +9,9 @@
     "start": "tsc && node dist/app.js",
     "test": "jsdom"
   },
+  "jest": {
+  "testEnvironment": "jsdom"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
