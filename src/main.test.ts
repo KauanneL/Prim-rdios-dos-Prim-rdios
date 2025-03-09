@@ -1,9 +1,15 @@
-import { formatarData, carregarPacientes, carregarMedicos, carregarSalas } from "../src/main";
-
+import {
+  formatarData,
+  carregarPacientes,
+  carregarMedicos,
+  carregarSalas,
+  carregarConsultasAgendadas,
+  carregarPacientesProntuarios,
+  carregarOcupacaoSalas,
+} from "../src/main";
 
 // Mock do fetch global
 global.fetch = jest.fn() as jest.Mock;
-
 
 describe("Testes unitários", () => {
   beforeEach(() => {
@@ -13,6 +19,9 @@ describe("Testes unitários", () => {
       <select id="prontuarioPaciente"></select>
       <select id="consultaMedico"></select>
       <select id="consultaSala"></select>
+      <table><tbody id="consultasAgendadasList"></tbody></table>
+      <table><tbody id="pacientesProntuariosList"></tbody></table>
+      <table><tbody id="salasList"></tbody></table>
     `;
   });
 
@@ -23,61 +32,84 @@ describe("Testes unitários", () => {
 
   test("carregarPacientes deve preencher os selects corretamente", async () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue([
-          { id: "1", nome: "João" },
-          { id: "2", nome: "Maria" }
-        ])
-      });
-      
+      ok: true,
+      json: jest.fn().mockResolvedValue([
+        { id: "1", nome: "João" },
+        { id: "2", nome: "Maria" },
+      ]),
+    });
 
     await carregarPacientes();
-    
     expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/paciente");
-    const consultaPaciente = document.getElementById("consultaPaciente");
-if (consultaPaciente) {
-  consultaPaciente.innerHTML = "João";
-}
-const prontuarioPaciente = document.getElementById("prontuarioPaciente");
-if (prontuarioPaciente) {
-  prontuarioPaciente.innerHTML = "Maria";
-}
-
   });
 
   test("carregarMedicos deve preencher o select de médicos", async () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue([
-        { id: "1", nome: "Dr. Pedro" }
-      ])
+      json: jest.fn().mockResolvedValue([{ id: "1", nome: "Dr. Pedro" }]),
     });
 
     await carregarMedicos();
-    
     expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/medicos");
-    const consultaMedico = document.getElementById("consultaMedico");
-if (consultaMedico) {
-  consultaMedico.innerHTML = "Dr. Pedro";
-}
-
   });
 
   test("carregarSalas deve preencher o select de salas", async () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue([
-        { id: "101", consultorio: "Sala 101" }
-      ])
+      json: jest.fn().mockResolvedValue([{ id: "101", consultorio: "Sala 101" }]),
     });
 
     await carregarSalas();
-    
     expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/salas");
-    const consultaSala = document.getElementById("consultaSala");
-if (consultaSala) {
-  consultaSala.innerHTML = "Sala 101";
-}
+  });
 
+  test("carregarConsultasAgendadas deve preencher a tabela corretamente", async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue([
+        {
+          paciente_nome: "João",
+          medico_nome: "Dr. Pedro",
+          data: "2025-03-07",
+          horario: "10:00",
+          sala_consultorio: "Sala 101",
+        },
+      ]),
+    });
+
+    await carregarConsultasAgendadas();
+    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/consultas");
+  });
+
+  test("carregarPacientesProntuarios deve preencher a tabela corretamente", async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue([
+        { paciente_nome: "João", histórico: "Paciente com dor de cabeça." },
+      ]),
+    });
+
+    await carregarPacientesProntuarios();
+    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/prontuarios");
+  });
+
+  test("carregarOcupacaoSalas deve preencher a tabela corretamente", async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue([
+        { id: 101, consultorio: "Sala 101" },
+      ]),
+    });
+
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue([
+        { sala_consultorio: "Sala 101", data: "2025-03-07", horario: "10:00" },
+      ]),
+    });
+
+    await carregarOcupacaoSalas();
+    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/salas");
+    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/consultas");
   });
 });
