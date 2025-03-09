@@ -12,7 +12,7 @@ import {
 // Mock do fetch global
 global.fetch = jest.fn() as jest.Mock;
 
-describe("Testes unitários", () => {
+describe("Testes unitários das funções", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     document.body.innerHTML = `
