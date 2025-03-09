@@ -1,3 +1,4 @@
+// MARIANA
 document.addEventListener("DOMContentLoaded", () => {
   configurarFormularios();
   carregarPacientes();
@@ -38,6 +39,7 @@ export async function carregarPacientes(): Promise<void> {
         console.error("Erro ao carregar pacientes:", error);
     }
 }
+// RUTHYANNE
 export async function carregarMedicos(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/medicos");
@@ -78,6 +80,7 @@ export async function carregarSalas(): Promise<void> {
         console.error("Erro ao carregar salas:", error);
     }
 }
+// KAUANNE
 export function configurarFormularios(): void {
     const pacienteForm = document.getElementById("pacienteForm") as HTMLFormElement;
     pacienteForm.addEventListener("submit", async (event) => {
@@ -185,6 +188,7 @@ export function configurarFormularios(): void {
         }
     });
 }
+// RUTHYANNE
 export async function carregarConsultasAgendadas(): Promise<void> {
     try {
         const response = await fetch("http://localhost:3000/api/consultas");
