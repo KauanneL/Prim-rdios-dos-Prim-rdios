@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as MedicoModel from '../modelos/medicoModelo.js';
-// Função para obter os alunos
 export function getMedicos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,16 +22,15 @@ export function getMedicos(req, res) {
 export function criarMedico(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { nome, especialidade } = req.body;
-        // Verifica se todos os campos obrigatórios estão presentes
         if (!nome || !especialidade) {
-            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' });
         }
         try {
             const result = yield MedicoModel.criarMedico(nome, especialidade);
-            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+            return res.status(201).json({ id: result.insertId });
         }
         catch (error) {
-            return res.status(500).json({ message: 'Erro ao criar médico' }); // 'return' aqui também
+            return res.status(500).json({ message: 'Erro ao criar médico' });
         }
     });
 }

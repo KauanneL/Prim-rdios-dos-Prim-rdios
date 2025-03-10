@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as ProntuarioModel from '../modelos/prontuarioModelo.js';
-// Função para obter os alunos
 export function getProntuario(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,16 +22,15 @@ export function getProntuario(req, res) {
 export function criarProntuario(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { paciente_nome, histórico } = req.body;
-        // Verifica se todos os campos obrigatórios estão presentes
         if (!paciente_nome || !histórico) {
-            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' });
         }
         try {
             const result = yield ProntuarioModel.criarProntuario(paciente_nome, histórico);
-            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+            return res.status(201).json({ id: result.insertId });
         }
         catch (error) {
-            return res.status(500).json({ message: 'Erro ao criar prontuário' }); // 'return' aqui também
+            return res.status(500).json({ message: 'Erro ao criar prontuário' });
         }
     });
 }

@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// MARIANA
 document.addEventListener("DOMContentLoaded", () => {
     configurarFormularios();
     carregarPacientes();
@@ -46,6 +47,7 @@ export function carregarPacientes() {
         }
     });
 }
+// RUTHYANNE
 export function carregarMedicos() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -88,6 +90,7 @@ export function carregarSalas() {
         }
     });
 }
+// KAUANNE
 export function configurarFormularios() {
     const pacienteForm = document.getElementById("pacienteForm");
     pacienteForm.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
@@ -178,6 +181,7 @@ export function configurarFormularios() {
         }
     }));
 }
+// RUTHYANNE
 export function carregarConsultasAgendadas() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

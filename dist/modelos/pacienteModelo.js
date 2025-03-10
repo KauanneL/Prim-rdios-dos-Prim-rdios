@@ -7,10 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 dotenv.config();
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
     host: 'localhost',
     user: "root",
@@ -18,7 +17,6 @@ const pool = mysql.createPool({
     database: "kbd",
     port: 3306,
 });
-// Função para obter todos os alunos
 export function getPaciente() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -31,17 +29,15 @@ export function getPaciente() {
         }
     });
 }
-// Função para criar aluno
 export function criarPaciente(nome, idade, telefone) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Verifique se algum valor é inválido antes de tentar inserir no banco
         if (!nome || !idade || !telefone) {
             throw new Error('Campos obrigatórios não preenchidos');
         }
         try {
             const [result] = yield pool.execute('INSERT INTO paciente (nome,idade,telefone) VALUES (?, ?, ?)', [nome, idade, telefone]);
             const insertId = result.insertId;
-            return { insertId }; // Retorna o ID do aluno inserido
+            return { insertId };
         }
         catch (error) {
             console.error('Erro ao criar paciente:', error);

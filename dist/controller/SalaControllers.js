@@ -22,16 +22,15 @@ export function getSala(req, res) {
 export function criarSala(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { numero, data, horario, status } = req.body;
-        // Verifica se todos os campos obrigatórios estão presentes
         if (!numero || !data || !horario || !status) {
-            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' });
         }
         try {
             const result = yield SalaModel.criarSala(numero, data, horario, status);
-            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+            return res.status(201).json({ id: result.insertId });
         }
         catch (error) {
-            return res.status(500).json({ message: 'Erro ao criar sala' }); // 'return' aqui também
+            return res.status(500).json({ message: 'Erro ao criar sala' });
         }
     });
 }

@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as PacienteModel from '../modelos/pacientemodelo.js';
-// Função para obter os alunos
 export function getPaciente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,16 +22,14 @@ export function getPaciente(req, res) {
 export function criarPaciente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { nome, idade, telefone } = req.body;
-        // Verifica se todos os campos obrigatórios estão presentes
         if (!nome || !idade || !telefone) {
-            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+            return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' });
         }
         try {
             const result = yield PacienteModel.criarPaciente(nome, idade, telefone);
-            return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+            return res.status(201).json({ id: result.insertId });
         }
-        catch (error) {
-            return res.status(500).json({ message: 'Erro ao criar paciente' }); // 'return' aqui também
+        catch (error) { // 'return' aqui também
         }
     });
 }
