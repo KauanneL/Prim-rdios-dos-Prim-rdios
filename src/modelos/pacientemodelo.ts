@@ -4,7 +4,6 @@ import { ResultSetHeader } from 'mysql2';
 
 dotenv.config();
 
-// Criação da conexão com o banco de dados
 const pool = mysql.createPool({
   host: 'localhost',
   user: "root",
@@ -13,7 +12,6 @@ const pool = mysql.createPool({
   port: 3306,
 });
 
-// Função para obter todos os alunos
 export async function getPaciente() {
   try {
     const [rows] = await pool.execute('SELECT * FROM paciente');
@@ -23,14 +21,12 @@ export async function getPaciente() {
     throw new Error('Erro ao obter dados dos paciente');
   }
 }
-
-// Função para criar aluno
 export async function criarPaciente(
   nome: string,
   idade:number,
   telefone:string
 ) {
-  // Verifique se algum valor é inválido antes de tentar inserir no banco
+  
   if (!nome || !idade || !telefone) {
     throw new Error('Campos obrigatórios não preenchidos');
   }
@@ -42,7 +38,7 @@ export async function criarPaciente(
     );
 
     const insertId = (result as ResultSetHeader).insertId;
-    return { insertId }; // Retorna o ID do aluno inserido
+    return { insertId }; 
   } catch (error) {
     console.error('Erro ao criar paciente:', error);
     throw new Error('Erro ao inserir dados do paciente');
