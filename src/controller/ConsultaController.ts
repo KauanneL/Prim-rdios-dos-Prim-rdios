@@ -4,6 +4,9 @@ import { Request, Response } from 'express';
 // Isso nos permite chamar funções como 'ConsultaModel.getConsulta()' e 'ConsultaModel.criarConsulta()'.
 import * as ConsultaModel from '../modelos/consultaModelo.js';
 
+//Possibilitar a importação e utilização das funções do modelo dentro do controlador, permitindo que o controller se comunique com o banco de dados através das funções definidas no modelo.
+
+Vamos entender detalhadamente o que cada parte faz:
 
 // Esta função vai buscar todas as consultas cadastradas no banco de dados.
 export async function getConsulta(req: Request, res: Response) {
