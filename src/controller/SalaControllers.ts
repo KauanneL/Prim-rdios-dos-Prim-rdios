@@ -9,7 +9,6 @@ export async function getSala(req: Request, res: Response) {
       res.status(500).json({ message: 'Erro ao buscar médico' });
     }
   }
-
   export async function criarSala(req: Request, res: Response): Promise<any> {
     const { numero, data, horario, status } = req.body;
   
