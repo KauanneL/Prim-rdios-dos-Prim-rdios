@@ -2,7 +2,8 @@
 
 // Importa a biblioteca `mysql2/promise` para permitir conexões assíncronas com o MySQL.
 import mysql from 'mysql2/promise';
-// Importa a biblioteca `dotenv` para carregar variáveis de ambiente de um arquivo `.env`., ajundando a manter informações sensíveis (como credenciais do banco) fora do código.
+// Importa a biblioteca `dotenv` para carregar variáveis de ambiente de um arquivo `.env`.
+// Ajundando a manter informações sensíveis (como credenciais do banco) fora do código.
 import dotenv from 'dotenv';
 // Importa `ResultSetHeader` do `mysql2`, que é usado para acessar o ID inserido após um INSERT.
 import { ResultSetHeader } from 'mysql2';
