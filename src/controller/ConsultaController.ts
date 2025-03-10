@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 // Importamos as funções do modelo 'consultaModelo.js' e atribuímos à variável 'ConsultaModel'.
 // Isso nos permite chamar funções como 'ConsultaModel.getConsulta()' e 'ConsultaModel.criarConsulta()'.
 import * as ConsultaModel from '../modelos/consultaModelo.js';
+
+
 // Esta função vai buscar todas as consultas cadastradas no banco de dados.
 export async function getConsulta(req: Request, res: Response) {
     try {
@@ -17,7 +19,7 @@ export async function getConsulta(req: Request, res: Response) {
     }
   }
   export async function criarConsulta(req: Request, res: Response): Promise<any> {
-      // Extraímos os dados enviados pelo cliente no corpo da requisição (req.body).
+      // Extraímos os dados enviados pelo paciente no corpo da requisição.
     const { paciente_nome, medico_nome, sala_consultorio, data, horario } = req.body;
       // Verifica se todos os campos obrigatórios foram preenchidos.
     if (!paciente_nome || !medico_nome || !sala_consultorio || !data || !horario) {
