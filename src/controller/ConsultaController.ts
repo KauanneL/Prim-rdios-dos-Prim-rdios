@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as ConsultaModel from '../modelos/consultaModelo.js';
 
-// Função para obter os alunos
 export async function getConsulta(req: Request, res: Response) {
     try {
       const consulta = await ConsultaModel.getConsulta();
@@ -13,7 +12,6 @@ export async function getConsulta(req: Request, res: Response) {
   export async function criarConsulta(req: Request, res: Response): Promise<any> {
     const { paciente_nome, medico_nome, sala_consultorio, data, horario } = req.body;
   
-    // Verifica se todos os campos obrigatórios estão presentes
     if (!paciente_nome || !medico_nome || !sala_consultorio || !data || !horario) {
       return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
     }
