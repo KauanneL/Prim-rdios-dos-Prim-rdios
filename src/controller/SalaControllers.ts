@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as SalaModel from '../modelos/salaModelo.js';
 
-
 export async function getSala(req: Request, res: Response) {
     try {
       const sala = await SalaModel.getSala();
