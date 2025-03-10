@@ -14,15 +14,14 @@ export async function getSala(req: Request, res: Response) {
   export async function criarSala(req: Request, res: Response): Promise<any> {
     const { numero, data, horario, status } = req.body;
   
-    // Verifica se todos os campos obrigatórios estão presentes
     if (!numero || !data || !horario || !status) {
-      return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+      return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); 
     }
   
     try {
       const result = await SalaModel.criarSala(numero, data, horario, status);
-      return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+      return res.status(201).json({ id: result.insertId }); 
     } catch (error) {
-      return res.status(500).json({ message: 'Erro ao criar sala' }); // 'return' aqui também
+      return res.status(500).json({ message: 'Erro ao criar sala' });
     }
   }
