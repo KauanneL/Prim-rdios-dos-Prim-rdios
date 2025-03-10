@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import * as ProntuarioModel from '../modelos/prontuarioModelo.js';
 
-
-// Função para obter os alunos
 export async function getProntuario(req: Request, res: Response) {
     try {
       const prontuario = await ProntuarioModel.getProntuario();
@@ -14,15 +12,14 @@ export async function getProntuario(req: Request, res: Response) {
   export async function criarProntuario(req: Request, res: Response): Promise<any> {
     const { paciente_nome, histórico } = req.body;
   
-    // Verifica se todos os campos obrigatórios estão presentes
     if (!paciente_nome || !histórico) {
-      return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
+      return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); 
     }
   
     try {
       const result = await ProntuarioModel.criarProntuario(paciente_nome, histórico);
-      return res.status(201).json({ id: result.insertId }); // Adiciona 'return' aqui também
+      return res.status(201).json({ id: result.insertId });
     } catch (error) {
-      return res.status(500).json({ message: 'Erro ao criar prontuário' }); // 'return' aqui também
+      return res.status(500).json({ message: 'Erro ao criar prontuário' }); 
     }
   }
