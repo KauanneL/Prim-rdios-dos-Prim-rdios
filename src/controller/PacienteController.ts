@@ -9,7 +9,6 @@ export async function getPaciente(req: Request, res: Response) {
     res.status(500).json({ message: 'Erro ao buscar paciente' });
   }
 }
-
 export async function criarPaciente(req: Request, res: Response): Promise<any> {
   const { nome, idade,telefone } = req.body;
 
