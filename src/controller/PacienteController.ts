@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as PacienteModel from '../modelos/pacientemodelo.js';
 
-// Função para obter os alunos
 export async function getPaciente(req: Request, res: Response) {
   try {
     const paciente = await PacienteModel.getPaciente();
@@ -14,7 +13,6 @@ export async function getPaciente(req: Request, res: Response) {
 export async function criarPaciente(req: Request, res: Response): Promise<any> {
   const { nome, idade,telefone } = req.body;
 
-  // Verifica se todos os campos obrigatórios estão presentes
   if (!nome || !idade || !telefone) {
     return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
   }
