@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise'; // Usando a versão promise do mysql2
+import mysql from 'mysql2/promise'; 
 import dotenv from 'dotenv';
 import { ResultSetHeader } from 'mysql2';
 

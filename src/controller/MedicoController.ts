@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import * as MedicoModel from '../modelos/medicoModelo.js';
 
-// Função para obter os alunos
 export async function getMedicos(req: Request, res: Response) {
   try {
     const medico = await MedicoModel.getMedico();
@@ -13,7 +12,6 @@ export async function getMedicos(req: Request, res: Response) {
 export async function criarMedico(req: Request, res: Response): Promise<any> {
   const { nome, especialidade } = req.body;
 
-  // Verifica se todos os campos obrigatórios estão presentes
   if (!nome || !especialidade) {
     return res.status(400).json({ message: 'Todos os campos devem ser preenchidos.' }); // Adiciona 'return'
   }
