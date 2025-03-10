@@ -1,12 +1,11 @@
+//Possibilitar a importação e utilização das funções do modelo dentro do controlador,
+//Permitindo que o controller se comunique com o banco de dados através das funções definidas no modelo.
+
 // Importamos os tipos 'Request' e 'Response' do Express para definir corretamente os parâmetros das funções.
 import { Request, Response } from 'express';
 // Importamos as funções do modelo 'consultaModelo.js' e atribuímos à variável 'ConsultaModel'.
 // Isso nos permite chamar funções como 'ConsultaModel.getConsulta()' e 'ConsultaModel.criarConsulta()'.
 import * as ConsultaModel from '../modelos/consultaModelo.js';
-
-//Possibilitar a importação e utilização das funções do modelo dentro do controlador, permitindo que o controller se comunique com o banco de dados através das funções definidas no modelo.
-
-Vamos entender detalhadamente o que cada parte faz:
 
 // Esta função vai buscar todas as consultas cadastradas no banco de dados.
 export async function getConsulta(req: Request, res: Response) {
@@ -17,7 +16,7 @@ export async function getConsulta(req: Request, res: Response) {
       res.json(consulta);
     } catch (error) {
         // Se ocorrer um erro na busca, enviamos um código de status HTTP 500 (erro interno do servidor)
-        // e uma mensagem informando que houve um problema.
+        // e uma mensagem informando que houve um erro ao buscar as consultas.
       res.status(500).json({ message: 'Erro ao buscar consulta' });
     }
   }
@@ -36,7 +35,7 @@ export async function getConsulta(req: Request, res: Response) {
         // e enviamos o ID da nova consulta cadastrada.
       return res.status(201).json({ id: result.insertId });
     } catch (error) {
-        // Se ocorrer um erro ao cadastrar a consulta, retornamos um código 500 e uma mensagem de erro.
+        // Se ocorrer um erro ao cadastrar a consulta, retornamos um código 500 e uma mensagem.
       return res.status(500).json({ message: 'Erro ao criar consulta' }); 
     }
   }
